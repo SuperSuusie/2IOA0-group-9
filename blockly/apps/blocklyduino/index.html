@@ -461,10 +461,15 @@ function init() {
   </div>
   <script>
     let popup = document.getElementById("popup");
+    const audio = new Audio();
+    audio.src = "../../media/happySound.wav";
+    audio.src = "../../media/happySound.ogg";
+    audio.src = "../../media/happySound.mp3";
     
     function uploadFunctions(){
       uploadClick();
       openPopup();
+      audio.play();
     }
     
     function openPopup(){
