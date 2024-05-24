@@ -14,7 +14,6 @@
   <script type="text/javascript" src="blockly_helper.js"></script>
   <link rel="stylesheet" href="../../core/popup.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progress Bar</title>
   <link rel="stylesheet" href="../../core/progress_bar.css">
   <script>
 
@@ -493,25 +492,14 @@ function init() {
   </div>
 
   <script>
-    function startProgressBar() {
-      var elem = document.getElementById("myBar");
-      var width = 0;
-      var id = setInterval(frame, 10);
-      function frame() {
-        if (width >= 100) {
-          clearInterval(id);
-        } else {
-          width++;
-          elem.style.width = width + "%";
-        }
-      }
+    // Function to update the progress bar width
+    function updateProgressBar(progress) {
+      var progressBar = document.getElementById("myBar");
+      progressBar.style.width = progress + "%";
     }
 
-    window.onload = function() {
-      // Call the function to start the progress bar
-      startProgressBar();
-    
-    };
+    updateProgressBar(70);
+
   </script>
 
 </body>
