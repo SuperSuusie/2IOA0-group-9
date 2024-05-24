@@ -350,6 +350,10 @@ Blockly.Blocks.grove_led = {
     this.setNextStatement(!0, null);
     this.setTooltip("green LED");
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_button = {
   helpUrl:
