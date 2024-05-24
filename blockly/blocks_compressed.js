@@ -32,6 +32,7 @@ Blockly.Blocks.base_delay = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Delay specific time");
+    this.sound_correct_block();
   },
 };
 Blockly.Blocks.base_map = {
@@ -905,7 +906,6 @@ Blockly.Blocks.lists_create_empty = {
     this.setOutput(!0, "Array");
     this.appendDummyInput().appendField(Blockly.Msg.LISTS_CREATE_EMPTY_TITLE);
     this.setTooltip(Blockly.Msg.LISTS_CREATE_EMPTY_TOOLTIP);
-    this.sound_correct_block();
   },
 };
 Blockly.Blocks.lists_create_with = {
