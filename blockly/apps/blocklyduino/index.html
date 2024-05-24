@@ -183,7 +183,7 @@ function init() {
   </script>
   <style>
     html, body {
-      height: 100%;
+      height: calc(100vh - 30px);
     }
     body {
       background-color: #fff;
@@ -304,6 +304,7 @@ function init() {
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick('xml');">XML</td>
             <td class="tabmax">
+              <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
@@ -487,8 +488,6 @@ function init() {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
 
-<<<<<<< Updated upstream
-=======
   <!-- code for hint popup -->
   <div class="container">
     <div class="popup" id="openhintpopup">
@@ -518,7 +517,7 @@ function init() {
     let casetwo = document.getElementById("usecasetwo");
 
     function openHint(){
-      openHintPopup();
+      hintpopup.classList.add("open-popup");
     }
 
     function useCaseOne(){
@@ -527,10 +526,6 @@ function init() {
 
     function useCaseTwo(){
       casetwo.classlist.add("open-popup")
-    }
-
-    function openHintPopup(){
-      hintpopup.classList.add("open-popup");
     }
     
     function closeHintPopupOne(){
@@ -543,7 +538,6 @@ function init() {
 
   </script>
 
->>>>>>> Stashed changes
   <!--code for progress bar -->
   <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
