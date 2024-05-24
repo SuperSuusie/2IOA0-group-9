@@ -19356,6 +19356,9 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function (a, b, c, d) {
 Blockly.BlockSvg.prototype.sound_correct_block = function() {
     this.workspace.playAudio("click")
 };
+Blockly.BlockSvg.prototype.sound_wrong_block = function() {
+    this.workspace.playAudio("wrong_placement")
+};
 
 Blockly.Msg = {};
 goog.getMsgOrig = goog.getMsg;
@@ -22424,6 +22427,14 @@ Blockly.init_ = function (a) {
       ],
       "delete"
     );
+    a.loadAudio_(
+        [
+          b.pathToMedia + "wrong_placement.mp3",
+          b.pathToMedia + "wrong_placement.ogg",
+          b.pathToMedia + "wrong_placement.wav",
+        ],
+        "wrong_placement"
+      );    
     var d = [],
       b = function () {
         for (; d.length; ) Blockly.unbindEvent_(d.pop());
