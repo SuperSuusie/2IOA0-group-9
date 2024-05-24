@@ -493,7 +493,7 @@ function init() {
   </div>
 
   <script>
-    window.onload = function() {
+    function startProgressBar() {
       var elem = document.getElementById("myBar");
       var width = 0;
       var id = setInterval(frame, 10);
@@ -505,6 +505,12 @@ function init() {
           elem.style.width = width + "%";
         }
       }
+    }
+
+    window.onload = function() {
+      // Call the function to start the progress bar
+      startProgressBar();
+    
     };
   </script>
 
