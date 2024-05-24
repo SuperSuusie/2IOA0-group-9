@@ -19357,7 +19357,7 @@ Blockly.BlockSvg.prototype.sound_correct_block = function() {
     this.workspace.playAudio("click")
 };
 Blockly.BlockSvg.prototype.sound_wrong_block = function() {
-    this.workspace.playAudio("wrong_placement")
+    this.workspace.playAudio("wrong_block")
 };
 
 Blockly.Msg = {};
@@ -22433,7 +22433,7 @@ Blockly.init_ = function (a) {
           b.pathToMedia + "wrong_placement.ogg",
           b.pathToMedia + "wrong_placement.wav",
         ],
-        "wrong_placement"
+        "wrong_block"
       );    
     var d = [],
       b = function () {
