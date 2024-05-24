@@ -303,6 +303,7 @@ function init() {
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick('xml');">XML</td>
             <td class="tabmax">
+              <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
@@ -486,6 +487,32 @@ function init() {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
 
+  <!-- code for hint popup -->
+  <div class="container">
+    <div class="popup" id="hintpopup">
+      <h2>This is a hint!</h2>
+      <p>You should try...</p>
+      <button type="button" onclick="closeHintPopup()">Continue</button>
+    </div>
+  </div>
+
+  <script>   
+  	let hintpopup = document.getElementById("hintpopup");
+
+    function openHint(){
+      openHintPopup();
+    }
+
+    function openHintPopup(){
+      hintpopup.classList.add("open-popup");
+    }
+    
+    function closeHintPopup(){
+      hintpopup.classList.remove("open-popup");
+    }
+
+  </script>
+
   <!--code for progress bar -->
   <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
@@ -501,6 +528,8 @@ function init() {
     updateProgressBar(70);
 
   </script>
+
+
 
 </body>
 </html>
