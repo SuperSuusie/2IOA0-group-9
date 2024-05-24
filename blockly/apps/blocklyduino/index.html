@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html manifest=node.manifest>
 <head>
   <meta charset="utf-8">
@@ -12,7 +13,10 @@
   <script type="text/javascript" src="FileSaver.min.js"></script>
   <script type="text/javascript" src="blockly_helper.js"></script>
   <link rel="stylesheet" href="../../core/popup.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../core/progress_bar.css">
   <script>
+
 
 /**
  * List of tab names. 
@@ -481,5 +485,22 @@ function init() {
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
+
+  <!--code for progress bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+
+  <script>
+    // Function to update the progress bar width
+    function updateProgressBar(progress) {
+      var progressBar = document.getElementById("myBar");
+      progressBar.style.width = progress + "%";
+    }
+
+    updateProgressBar(70);
+
+  </script>
+
 </body>
 </html>
