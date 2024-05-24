@@ -302,7 +302,7 @@ function init() {
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
-              <button onclick="saveCode()">Save Arduino Code</button>
+              <button onclick="arduinoFunctions()">Save Arduino Code</button>
               <button onclick="save()">Save XML</button>
               <button id="fakeload">Load XML</button>
               <input type="file" id="load" style="display: none;"/>
@@ -449,24 +449,39 @@ function init() {
     </category>
   </xml>
 
-  <!-- code for popup -->
+  <!-- code for upload popup -->
   <div class="container">
-    <div class="popup" id="popup">
+    <div class="popup" id="uploadPopup">
       <img src="../../media/thumbsUp.png">
       <h2>Great Job</h2>
       <p>You&apos;ve uploaded your code!</p>
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
+    <div class="popup" id="arduinoPopup">
+      <img src="../../media/thumbsUp.png">
+      <h2>You&apos;ve saved the arduino code</h2>
+      <p>Well done, keep working on it!</p>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
   </div>
   <script>
-    let popup = document.getElementById("popup");
+    let popup;
+
     const audio = new Audio();
-    audio.src = "../../media/happySound.wav";
-    audio.src = "../../media/happySound.ogg";
-    audio.src = "../../media/happySound.mp3";
+    audio.src = "../../media/correctSubmission.wav"
+    audio.src = "../../media/correctSubmission.ogg";
+    audio.src = "../../media/correctSubmission.mp3";
     
     function uploadFunctions(){
       uploadClick();
+      popup = document.getElementById("uploadPopup");
+      openPopup();
+      audio.play();
+    }
+
+    function arduinoFunctions(){
+      saveCode();
+      popup = document.getElementById("arduinoPopup");
       openPopup();
       audio.play();
     }
