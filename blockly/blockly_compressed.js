@@ -19352,12 +19352,12 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function (a, b, c, d) {
   a.push("z");
 };
 
-//add additional functions related to defininf play functions in here
-Blockly.BlockSvg.prototype.sound_correct_block = function() {
-    this.workspace.playAudio("click")
-};
+//add additional functions related to defining play functions in here
 Blockly.BlockSvg.prototype.sound_wrong_block = function() {
-    this.workspace.playAudio("wrong_block")
+  this.workspace.playAudio("wrong")
+};
+Blockly.BlockSvg.prototype.sound_correct_block = function() {
+    this.workspace.playAudio("wrong")
 };
 
 Blockly.Msg = {};

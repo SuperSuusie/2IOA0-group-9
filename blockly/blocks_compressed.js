@@ -35,7 +35,7 @@ Blockly.Blocks.base_delay = {
 
   },
   mutationToDom: function() {
-    this.sound_wrong_block();
+    this.sound_correct_block();
     return null;
   },
 };
