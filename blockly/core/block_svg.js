@@ -1073,7 +1073,7 @@ Blockly.BlockSvg.disposeUiStep_ = function(clone, rtl) {
  * Play some UI effects (sound, ripple) after a connection has been established.
  */
 Blockly.BlockSvg.prototype.connectionUiEffect = function() {
-  this.workspace.playAudio('click');
+  this.workspace.playAudio('');
 
   // Determine the absolute coordinates of the inferior block.
   var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.svgGroup_));
