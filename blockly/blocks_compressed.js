@@ -54,6 +54,10 @@ Blockly.Blocks.base_map = {
     this.setOutput(!0);
     this.setTooltip("Re-maps a number from [0-1024] to another.");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_buildin_led = {
   helpUrl: "http://arduino.cc/en/Reference/DigitalWrite",
@@ -96,6 +100,10 @@ Blockly.Blocks.inout_digital_write = {
     this.setNextStatement(!0, null);
     this.setTooltip("Write digital value to a specific Port");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_digital_read = {
   helpUrl: "http://arduino.cc/en/Reference/DigitalRead",
@@ -109,6 +117,10 @@ Blockly.Blocks.inout_digital_read = {
       );
     this.setOutput(!0, "Boolean");
     this.setTooltip("");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.inout_analog_write = {
@@ -129,6 +141,10 @@ Blockly.Blocks.inout_analog_write = {
     this.setNextStatement(!0, null);
     this.setTooltip("Write analog value between 0 and 255 to a specific Port");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_analog_read = {
   helpUrl: "http://arduino.cc/en/Reference/AnalogRead",
@@ -139,6 +155,10 @@ Blockly.Blocks.inout_analog_read = {
       .appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN");
     this.setOutput(!0, "Number");
     this.setTooltip("Return value between 0 and 1024");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.inout_tone = {
@@ -159,6 +179,10 @@ Blockly.Blocks.inout_tone = {
     this.setNextStatement(!0, null);
     this.setTooltip("Generate audio tones on a pin");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_notone = {
   helpUrl: "http://www.arduino.cc/en/Reference/NoTone",
@@ -175,6 +199,10 @@ Blockly.Blocks.inout_notone = {
     this.setNextStatement(!0, null);
     this.setTooltip("Stop generating a tone on a pin");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_highlow = {
   helpUrl: "http://arduino.cc/en/Reference/Constants",
@@ -189,6 +217,10 @@ Blockly.Blocks.inout_highlow = {
     );
     this.setOutput(!0, "Boolean");
     this.setTooltip("");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.servo_move = {
@@ -217,6 +249,10 @@ Blockly.Blocks.servo_move = {
     this.setNextStatement(!0, null);
     this.setTooltip("move between 0~180 degree");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.servo_read_degrees = {
   helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo",
@@ -242,6 +278,10 @@ Blockly.Blocks.servo_read_degrees = {
     this.setOutput(!0, "Number");
     this.setTooltip("return that degree with the last servo move.");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.serial_print = {
   helpUrl: "http://www.arduino.cc/en/Serial/Print",
@@ -253,6 +293,10 @@ Blockly.Blocks.serial_print = {
     this.setTooltip(
       "Prints data to the console/serial port as human-readable ASCII text."
     );
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 // Copyright 2012 Google Inc.  Apache License 2.0
@@ -351,7 +395,7 @@ Blockly.Blocks.grove_led = {
     this.setTooltip("green LED");
   },
   mutationToDom: function() {
-    this.sound_wrong_block();
+    this.sound_correct_block();
     return null;
   },
 };
@@ -376,6 +420,10 @@ Blockly.Blocks.grove_button = {
       );
     this.setOutput(!0, "Boolean");
     this.setTooltip("Basic digital input");
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_rotary_angle = {
@@ -422,6 +470,10 @@ Blockly.Blocks.grove_tilt_switch = {
       "When the switch is level it is open, and when tilted, the switch closes."
     );
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_piezo_buzzer = {
   helpUrl:
@@ -450,6 +502,10 @@ Blockly.Blocks.grove_piezo_buzzer = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Emit a tone when the output is high");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_relay = {
@@ -480,6 +536,10 @@ Blockly.Blocks.grove_relay = {
     this.setTooltip(
       "capable of switching a much higher voltages and currents. The maximum voltage and current that can be controlled by this module upto 250V at 10 amps."
     );
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_temporature_sensor = {
@@ -536,6 +596,10 @@ Blockly.Blocks.grove_serial_lcd_print = {
     this.setNextStatement(!0, null);
     this.setTooltip("print text on an 16 character by 2 line LCD.");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_serial_lcd_power = {
   helpUrl:
@@ -569,6 +633,10 @@ Blockly.Blocks.grove_serial_lcd_power = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Turn LCD power on/off");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_serial_lcd_effect = {
@@ -604,6 +672,10 @@ Blockly.Blocks.grove_serial_lcd_effect = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Turn LCD power on/off");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_sound_sensor = {
@@ -672,6 +744,10 @@ Blockly.Blocks.grove_line_finder = {
       "Output digital signal so the robot can reliably follow a black line on a white background"
     );
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_ultrasonic_ranger = {
   helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Ultrasonic_Ranger",
@@ -698,6 +774,10 @@ Blockly.Blocks.grove_ultrasonic_ranger = {
       );
     this.setOutput(!0, "Number");
     this.setTooltip("Non-contact distance measurement module");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_motor_shield = {
@@ -726,6 +806,10 @@ Blockly.Blocks.grove_motor_shield = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Drive two brushed DC motors");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_thumb_joystick = {
@@ -851,6 +935,10 @@ Blockly.Blocks.grove_rgb_led = {
         .appendField("Color 1")
         .appendField(new Blockly.FieldColour("#00ff00"), "RGB0");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_rgb_led_container = {
   init: function () {
@@ -859,6 +947,10 @@ Blockly.Blocks.grove_rgb_led_container = {
     this.appendStatementInput("STACK");
     this.setTooltip("Add, remove items to reconfigure this chain");
     this.contextMenu = !1;
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_rgb_led_item = {
@@ -869,6 +961,10 @@ Blockly.Blocks.grove_rgb_led_item = {
     this.setNextStatement(!0);
     this.setTooltip("Add an item to the chain");
     this.contextMenu = !1;
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_bluetooth_slave = {
@@ -907,6 +1003,10 @@ Blockly.Blocks.grove_bluetooth_slave = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Bluetooth V2.0+EDR slave. Support single slave per board");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.lists = {};
@@ -1651,6 +1751,10 @@ Blockly.Blocks.controls_repeat = {
       Blockly.FieldTextInput.nonnegativeIntegerValidator
     );
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.controls_repeat_ext = {
   init: function () {
@@ -1827,6 +1931,10 @@ Blockly.Blocks.math_number = {
     );
     this.setOutput(!0, "Number");
     this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.math_arithmetic = {
