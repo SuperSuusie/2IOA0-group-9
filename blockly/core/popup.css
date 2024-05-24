@@ -49,6 +49,13 @@
     margin: 30px 0 10px; 
 }
 
+.popup h3{
+    font-size: 24px;
+    font-weight: 500;
+    margin: 50px 0 10px; 
+}
+
+
 .popup button{
     width: 100%;
     margin-top: 50px;
