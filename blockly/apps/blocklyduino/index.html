@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../core/popup.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../core/progress_bar.css">
+  <link rel="stylesheet" href="../../core/hint_button.css">
   <script>
 
 
@@ -303,6 +304,7 @@ function init() {
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick('xml');">XML</td>
             <td class="tabmax">
+              <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
@@ -486,6 +488,58 @@ function init() {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
 
+  <!-- code for hint popup -->
+  <div class="container">
+    <div class="popup" id="openhintpopup">
+      <h3>Which use case are you working on?</h3>
+      <button type="button" onclick="useCaseOne()">Use Case 1</button>
+      <button type="button" onclick="useCaseTwo()">Use Case 2</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecaseone">
+      <h3>Try...</h3>
+      <button type="button" onclick="closeHintPopupOne()">Close</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecasetwo">
+      <h3>Try...</h3>
+      <button type="button" onclick="closeHintPopupTwo()">Close</button>
+    </div>
+  </div>
+
+  <script>   
+  	let hintpopup = document.getElementById("openhintpopup");
+    let caseone = document.getElementById("usecaseone");
+    let casetwo = document.getElementById("usecasetwo");
+
+    function openHint(){
+      hintpopup.classList.add("open-popup");
+    }
+
+    function useCaseOne(){
+      hintpopup.classList.remove("open-popup");
+      caseone.classList.add("open-popup")
+    }
+
+    function useCaseTwo(){
+      hintpopup.classList.remove("open-popup");
+      casetwo.classList.add("open-popup")
+    }
+    
+    function closeHintPopupOne(){
+      caseone.classList.remove("open-popup");
+    }
+
+    function closeHintPopupTwo(){
+      casetwo.classList.remove("open-popup");
+    }
+
+  </script>
+
   <!--code for progress bar -->
   <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
@@ -501,6 +555,5 @@ function init() {
     updateProgressBar(70);
 
   </script>
-
 </body>
 </html>
