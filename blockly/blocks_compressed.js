@@ -72,6 +72,10 @@ Blockly.Blocks.inout_buildin_led = {
     this.setNextStatement(!0, null);
     this.setTooltip("light or off the build-in LED");
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.inout_digital_write = {
   helpUrl: "http://arduino.cc/en/Reference/DigitalWrite",
