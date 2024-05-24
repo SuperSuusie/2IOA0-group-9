@@ -445,6 +445,10 @@ Blockly.Blocks.grove_rotary_angle = {
     this.setOutput(!0, "Number");
     this.setTooltip("Analog output between 0 and Vcc");
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_tilt_switch = {
   helpUrl:
@@ -559,6 +563,10 @@ Blockly.Blocks.grove_temporature_sensor = {
       .appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN");
     this.setOutput(!0, "Number");
     this.setTooltip("return number of ambient temperature in \u2103");
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_serial_lcd_print = {
@@ -695,6 +703,10 @@ Blockly.Blocks.grove_sound_sensor = {
       .appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN");
     this.setOutput(!0, "Number");
     this.setTooltip("Detect the sound strength of the environment");
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_pir_motion_sensor = {
@@ -839,6 +851,10 @@ Blockly.Blocks.grove_thumb_joystick = {
     this.setTooltip(
       "output two analog values(200~800) representing two directions"
     );
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_rgb_led = {
@@ -1089,6 +1105,10 @@ Blockly.Blocks.lists_create_with = {
         0 == a && b.appendField(Blockly.Msg.LISTS_CREATE_WITH_INPUT_WITH);
       }
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.lists_create_with_container = {
   init: function () {
@@ -1329,6 +1349,10 @@ Blockly.Blocks.lists_setIndex = {
     this.getInput("ORDINAL") && this.moveInputBefore("ORDINAL", "TO");
     this.getInput("AT").appendField(b, "WHERE");
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.lists_getSublist = {
   init: function () {
@@ -1556,6 +1580,10 @@ Blockly.Blocks.controls_if = {
       a = a.nextConnection && a.nextConnection.targetBlock();
     }
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.controls_if_if = {
   init: function () {
@@ -1564,6 +1592,10 @@ Blockly.Blocks.controls_if_if = {
     this.appendStatementInput("STACK");
     this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
     this.contextMenu = !1;
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.controls_if_elseif = {
@@ -1577,6 +1609,10 @@ Blockly.Blocks.controls_if_elseif = {
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
     this.contextMenu = !1;
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.controls_if_else = {
   init: function () {
@@ -1587,6 +1623,10 @@ Blockly.Blocks.controls_if_else = {
     this.setPreviousStatement(!0);
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
     this.contextMenu = !1;
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.logic_compare = {
@@ -1639,6 +1679,10 @@ Blockly.Blocks.logic_compare = {
     this.prevBlocks_[0] = a;
     this.prevBlocks_[1] = b;
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.logic_operation = {
   init: function () {
@@ -1663,6 +1707,10 @@ Blockly.Blocks.logic_operation = {
       }[a];
     });
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.logic_negate = {
   init: function () {
@@ -1674,6 +1722,10 @@ Blockly.Blocks.logic_negate = {
       tooltip: Blockly.Msg.LOGIC_NEGATE_TOOLTIP,
       helpUrl: Blockly.Msg.LOGIC_NEGATE_HELPURL,
     });
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.logic_boolean = {
@@ -1688,6 +1740,10 @@ Blockly.Blocks.logic_boolean = {
     this.appendDummyInput().appendField(new Blockly.FieldDropdown(a), "BOOL");
     this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.logic_null = {
   init: function () {
@@ -1696,6 +1752,10 @@ Blockly.Blocks.logic_null = {
     this.setOutput(!0);
     this.appendDummyInput().appendField(Blockly.Msg.LOGIC_NULL);
     this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.logic_ternary = {
@@ -1751,10 +1811,6 @@ Blockly.Blocks.controls_repeat = {
       Blockly.FieldTextInput.nonnegativeIntegerValidator
     );
   },
-  mutationToDom: function() {
-    this.sound_wrong_block();
-    return null;
-  },
 };
 Blockly.Blocks.controls_repeat_ext = {
   init: function () {
@@ -1796,6 +1852,10 @@ Blockly.Blocks.controls_whileUntil = {
         UNTIL: Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL,
       }[a];
     });
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.controls_for = {
@@ -1965,6 +2025,10 @@ Blockly.Blocks.math_arithmetic = {
         POWER: Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER,
       }[a];
     });
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.math_single = {
@@ -2717,6 +2781,10 @@ Blockly.Blocks.text = {
       '"'
     );
   },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
+  },
 };
 Blockly.Blocks.text_join = {
   init: function () {
@@ -3171,6 +3239,10 @@ Blockly.Blocks.variables_set = {
   renameVar: function (a, b) {
     Blockly.Names.equals(a, this.getFieldValue("VAR")) &&
       this.setFieldValue(b, "VAR");
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
   contextMenuType_: "variables_get",
   customContextMenu: Blockly.Blocks.variables_get.customContextMenu,
