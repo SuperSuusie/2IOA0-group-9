@@ -32,7 +32,11 @@ Blockly.Blocks.base_delay = {
     this.setPreviousStatement(!0, null);
     this.setNextStatement(!0, null);
     this.setTooltip("Delay specific time");
+
+  },
+  mutationToDom: function() {
     this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.base_map = {
