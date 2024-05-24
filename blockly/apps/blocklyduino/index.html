@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../core/popup.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../core/progress_bar.css">
+  <link rel="stylesheet" href="../../core/hint_button.css">
   <script>
 
 
@@ -500,6 +501,31 @@ function init() {
 
     updateProgressBar(70);
 
+  </script>
+
+  <!-- Code for hint button -->
+
+  <button id="hintButton" onclick="openHintPopup()">Hint</button>
+
+  <!-- Popup -->
+  <div id="hintPopup" class="popup">
+    <!-- Popup content -->
+    <h2>Hint</h2>
+    <p>This is a hint message.</p>
+    <button onclick="closeHintPopup()">Close</button>
+  </div>
+
+  <script>
+    // JavaScript functions to control the hint button and popup
+    function openHintPopup() {
+        var popup = document.getElementById("hintPopup");
+        popup.style.display = "block";
+    }
+
+    function closeHintPopup() {
+        var popup = document.getElementById("hintPopup");
+        popup.style.display = "none";
+    }
   </script>
 
 </body>
