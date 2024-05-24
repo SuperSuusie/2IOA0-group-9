@@ -522,19 +522,19 @@ function init() {
 
     function useCaseOne(){
       hintpopup.classList.remove("open-popup");
-      caseone.classlist.add("open-popup")
+      caseone.classList.add("open-popup")
     }
 
     function useCaseTwo(){
       hintpopup.classList.remove("open-popup");
-      casetwo.classlist.add("open-popup")
+      casetwo.classList.add("open-popup")
     }
     
     function closeHintPopupOne(){
       caseone.classList.remove("open-popup");
     }
 
-    function closeHintPopupOne(){
+    function closeHintPopupTwo(){
       casetwo.classList.remove("open-popup");
     }
 
@@ -555,31 +555,5 @@ function init() {
     updateProgressBar(70);
 
   </script>
-
-  <!-- Code for hint button -->
-
-  <button id="hintButton" onclick="openHintPopup()">Hint</button>
-
-  <!-- Popup -->
-  <div id="hintPopup" class="popup">
-    <!-- Popup content -->
-    <h2>Hint</h2>
-    <p>This is a hint message.</p>
-    <button onclick="closeHintPopup()">Close</button>
-  </div>
-
-  <script>
-    // JavaScript functions to control the hint button and popup
-    function openHintPopup() {
-        var popup = document.getElementById("hintPopup");
-        popup.style.display = "block";
-    }
-
-    function closeHintPopup() {
-        var popup = document.getElementById("hintPopup");
-        popup.style.display = "none";
-    }
-  </script>
-
 </body>
 </html>
