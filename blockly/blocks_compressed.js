@@ -77,7 +77,7 @@ Blockly.Blocks.inout_buildin_led = {
     this.setTooltip("light or off the build-in LED");
   },
   mutationToDom: function() {
-    this.sound_correct_block();
+    this.sound_wrong_block();
     return null;
   },
 };
@@ -731,6 +731,10 @@ Blockly.Blocks.grove_pir_motion_sensor = {
     this.setTooltip(
       "When anyone moves in it's detecting range, the sensor outputs HIGH."
     );
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_line_finder = {
@@ -1594,7 +1598,7 @@ Blockly.Blocks.controls_if_if = {
     this.contextMenu = !1;
   },
   mutationToDom: function() {
-    this.sound_correct_block();
+    this.sound_wrong_block();
     return null;
   },
 };
@@ -1610,7 +1614,7 @@ Blockly.Blocks.controls_if_elseif = {
     this.contextMenu = !1;
   },
   mutationToDom: function() {
-    this.sound_correct_block();
+    this.sound_wrong_block();
     return null;
   },
 };
@@ -1625,7 +1629,7 @@ Blockly.Blocks.controls_if_else = {
     this.contextMenu = !1;
   },
   mutationToDom: function() {
-    this.sound_correct_block();
+    this.sound_wrong_block();
     return null;
   },
 };
@@ -1854,7 +1858,7 @@ Blockly.Blocks.controls_whileUntil = {
     });
   },
   mutationToDom: function() {
-    this.sound_wrong_block();
+    this.sound_correct_block();
     return null;
   },
 };
@@ -1904,6 +1908,10 @@ Blockly.Blocks.controls_for = {
       b.callback = Blockly.ContextMenu.callbackFactory(this, c);
       a.push(b);
     }
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.controls_forEach = {
@@ -3211,6 +3219,10 @@ Blockly.Blocks.variables_get = {
     c.setAttribute("type", this.contextMenuType_);
     b.callback = Blockly.ContextMenu.callbackFactory(this, c);
     a.push(b);
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.variables_set = {
