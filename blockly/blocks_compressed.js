@@ -732,6 +732,10 @@ Blockly.Blocks.grove_pir_motion_sensor = {
       "When anyone moves in it's detecting range, the sensor outputs HIGH."
     );
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
 };
 Blockly.Blocks.grove_line_finder = {
   helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Line_Finder",
