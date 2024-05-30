@@ -508,10 +508,19 @@ function init() {
 
   <div class="container">
     <div class="popup" id="usecaseone_hinttwo">
-      <h3>Step 2:</h3>
+      <h3>Hint 2:</h3>
       <h4>You can use a block with if and else if to set the sound thresholds.</h4>
-      <button type="button" onclick="CaseOneHintTwo()">Another hint</button>
+      <button type="button" onclick="CaseOneHintThree()">Another hint</button>
       <button type="button" onclick="closeHintPopupOneHintTwo()">Try again!</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecaseone_hintthree">
+      <h3>Hint 3:</h3>
+      <h4>Take a look at the colours of the blocks and the order that you should put them in!</h4>
+      <img class="img2" src="../../media/useCaseSoundSetUp.png">
+      <button type="button" onclick="closeHintPopupOneHintThree()">Try again!</button>
     </div>
   </div>
 
@@ -526,6 +535,7 @@ function init() {
   	let hintpopup = document.getElementById("openhintpopup");
     let caseone = document.getElementById("usecaseone");
     let caseone_hinttwo = document.getElementById("usecaseone_hinttwo");
+    let caseone_hintthree = document.getElementById("usecaseone_hintthree");
     let casetwo = document.getElementById("usecasetwo");
 
     function openHint(){
@@ -544,6 +554,15 @@ function init() {
 
     function closeHintPopupOneHintTwo(){
       caseone_hinttwo.classList.remove("open-popup")
+    }
+
+    function CaseOneHintThree(){
+      caseone_hinttwo.classList.remove("open-popup");
+      caseone_hintthree.classList.add("open-popup");
+    }
+
+    function closeHintPopupOneHintThree(){
+      caseone_hintthree.classList.remove("open-popup")
     }
 
     function useCaseTwo(){

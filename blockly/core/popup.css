@@ -43,6 +43,13 @@
     box-shadow: 0 2p 5px rgba(0, 0, 0, 0.234);
 }
 
+.popup .img2{
+    width: 200px;
+    margin-top: 0px;
+    border-radius: 0;
+    box-shadow: 0 2p 5px rgba(0, 0, 0, 0.234);
+}
+
 .popup h2{
     font-size: 38px;
     font-weight: 500;
