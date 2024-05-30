@@ -492,15 +492,26 @@ function init() {
   <div class="container">
     <div class="popup" id="openhintpopup">
       <h3>Which use case are you working on?</h3>
-      <button type="button" onclick="useCaseOne()">Use Case 1</button>
-      <button type="button" onclick="useCaseTwo()">Use Case 2</button>
+      <button type="button" onclick="useCaseOne()">Sound Sensor</button>
+      <button type="button" onclick="useCaseTwo()">Button</button>
     </div>
   </div>
 
   <div class="container">
     <div class="popup" id="usecaseone">
-      <h3>Try...</h3>
-      <button type="button" onclick="closeHintPopupOne()">Close</button>
+      <h3>Hint 1:</h3>
+      <h4>Remember to first define the sound sensor using the "set" block!</h4>
+      <button type="button" onclick="CaseOneHintTwo()">Another hint</button>
+      <button type="button" onclick="closeHintPopupOne()">Try again!</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecaseone_hinttwo">
+      <h3>Step 2:</h3>
+      <h4>You can use a block with if and else if to set the sound thresholds.</h4>
+      <button type="button" onclick="CaseOneHintTwo()">Another hint</button>
+      <button type="button" onclick="closeHintPopupOneHintTwo()">Try again!</button>
     </div>
   </div>
 
@@ -514,6 +525,7 @@ function init() {
   <script>   
   	let hintpopup = document.getElementById("openhintpopup");
     let caseone = document.getElementById("usecaseone");
+    let caseone_hinttwo = document.getElementById("usecaseone_hinttwo");
     let casetwo = document.getElementById("usecasetwo");
 
     function openHint(){
@@ -522,12 +534,21 @@ function init() {
 
     function useCaseOne(){
       hintpopup.classList.remove("open-popup");
-      caseone.classList.add("open-popup")
+      caseone.classList.add("open-popup");
+    }
+
+    function CaseOneHintTwo(){
+      caseone.classList.remove("open-popup");
+      caseone_hinttwo.classList.add("open-popup");
+    }
+
+    function closeHintPopupOneHintTwo(){
+      caseone_hinttwo.classList.remove("open-popup")
     }
 
     function useCaseTwo(){
       hintpopup.classList.remove("open-popup");
-      casetwo.classList.add("open-popup")
+      casetwo.classList.add("open-popup");
     }
     
     function closeHintPopupOne(){
