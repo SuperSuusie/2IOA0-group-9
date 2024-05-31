@@ -554,7 +554,7 @@
       const shouldIgnore = (attr) => ignoredAttributes.includes(attr.name);
       
       if (node1.nodeType !== node2.nodeType) {
-        alert(node1.nodeType,node2.nodeType);
+        alert("Oops, something went wrong... [1]");
         console.log(node1);
         console.log(node2);
         return false;
@@ -562,7 +562,7 @@
 
       if (node1.nodeType === Node.ELEMENT_NODE && node2.nodeType === Node.ELEMENT_NODE) {
         if (node1.nodeName.toLowerCase() !== node2.nodeName.toLowerCase()) {
-          alert(node1.nodeName,node2.nodeName);
+          alert("Oops, something went wrong... [2]");
           console.log(node1);
           console.log(node2);
           return false;
@@ -572,7 +572,7 @@
         const attrs2 = Array.from(node2.attributes || []).filter(attr => !shouldIgnore(attr));
 
         if (attrs1.length !== attrs2.length) {
-          alert(node1.length,node2.length);
+          alert("Oops, something went wrong... [3]");
           console.log(node1);
           console.log(node2);
           return false;
@@ -581,7 +581,7 @@
         for (let attr1 of attrs1) {
           const attr2 = attrs2.find(attr => attr.name === attr1.name);
           if (!attr2 || attr1.value !== attr2.value) {
-            alert(attr1.value,attr2.value);
+            alert("Oops, something went wrong... [4]");
             console.log(node1);
             console.log(node2);
             return false;
@@ -591,7 +591,7 @@
 
       if (node1.nodeType === Node.TEXT_NODE && node2.nodeType === Node.TEXT_NODE) {
         if(!ignoreTextDifferences && node1.nodeValue !== node2.nodeValue) {
-          alert(node1.nodeValue,node2.nodeValue);
+          alert("Oops, something went wrong... [5]");
           console.log(node1);
           console.log(node2);
           return false;
@@ -602,7 +602,7 @@
       const children2 = Array.from(node2.childNodes || []);
 
       if (children1.length !== children2.length) {
-        alert(children1.length,children2.length);
+        alert("Oops, something went wrong... [6]");
         console.log(children1);
         console.log(children2);
         return false;
