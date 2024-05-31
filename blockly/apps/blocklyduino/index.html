@@ -328,6 +328,7 @@
             <td id="tab_xml" class="taboff" onclick="tabClick('xml');">XML</td>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
+              <button type="button" onclick="checkCode()">Check</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
@@ -502,16 +503,36 @@
     // audio.src = "../../media/correctSubmission.ogg";
     // audio.src = "../../media/correctSubmission.mp3";
 
+    function loadXmlCodeFile() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          compareNodes(this);
+        }
+      };
+      xhttp.open("GET", "xmlCodeUC2.xml", true);
+      xhttp.send();
+    }
+
+    function compareNodes(xml) {
+      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlDoc = xml.responseXML;
+      var x = xmlDoc.getElementsByTagName('block')[0];
+      var y = xmlDom.getElementsByTagName('block')[0];
+      console.log(compareNodesIgnoreAttributes(x, y, ["id", "x", "y"]))
+    }
+
     //upload popup
     function uploadFunctions() {
-      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      var xmlCode = Blockly.Xml.domToPrettyText(xmlDom)
-      console.log(xmlCode);
       uploadClick();
-      // popup = document.getElementById("uploadPopup");
-      // openPopup();
-      compareCode(xmlCode);
-      // audio.play();
+      popup = document.getElementById("uploadPopup");
+      openPopup();
+      audio.play();
+    }
+
+    function checkCode() {
+      loadXmlCodeFile();
+      //popup
     }
 
     //save arduino code popup
@@ -598,6 +619,81 @@
     }
 
     updateProgressBar(70);
+  </script>
+
+  <script>
+
+    function compareNodesIgnoreAttributes(node1, node2, ignoredAttributes = [], ignoreTextDifferences = false) {
+      const shouldIgnore = (attr) => ignoredAttributes.includes(attr.name);
+      
+      if (node1.nodeType !== node2.nodeType) {
+        alert(node1.nodeType,node2.nodeType);
+        console.log(node1);
+        console.log(node2);
+        return false;
+      }
+
+      if (node1.nodeType === Node.ELEMENT_NODE && node2.nodeType === Node.ELEMENT_NODE) {
+        if (node1.nodeName.toLowerCase() !== node2.nodeName.toLowerCase()) {
+          alert(node1.nodeName,node2.nodeName);
+          console.log(node1);
+          console.log(node2);
+          return false;
+        }
+
+        const attrs1 = Array.from(node1.attributes || []).filter(attr => !shouldIgnore(attr));
+        const attrs2 = Array.from(node2.attributes || []).filter(attr => !shouldIgnore(attr));
+
+        if (attrs1.length !== attrs2.length) {
+          alert(node1.length,node2.length);
+          console.log(node1);
+          console.log(node2);
+          return false;
+        }
+
+        for (let attr1 of attrs1) {
+          const attr2 = attrs2.find(attr => attr.name === attr1.name);
+          if (!attr2 || attr1.value !== attr2.value) {
+            alert(attr1.value,attr2.value);
+            console.log(node1);
+            console.log(node2);
+            return false;
+          }
+        }
+      }
+
+      if (node1.nodeType === Node.TEXT_NODE && node2.nodeType === Node.TEXT_NODE) {
+        if(!ignoreTextDifferences && node1.nodeValue !== node2.nodeValue) {
+          alert(node1.nodeValue,node2.nodeValue);
+          console.log(node1);
+          console.log(node2);
+          return false;
+        }
+      }
+
+      const children1 = Array.from(node1.childNodes || []);
+      const children2 = Array.from(node2.childNodes || []);
+
+      if (children1.length !== children2.length) {
+        alert(children1.length,children2.length);
+        console.log(children1);
+        console.log(children2);
+        return false;
+      }
+
+      for (let i = 0; i < children1.length; i++) {
+        if (!compareNodesIgnoreAttributes(children1[i], children2[i], ignoredAttributes)) {
+          console.log(node1);
+          console.log(node2);
+          return false;
+        }
+      }
+    
+      audio.play();
+      return true;
+      
+
+    }
 
   </script>
 
