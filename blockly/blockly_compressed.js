@@ -19353,11 +19353,11 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function (a, b, c, d) {
 };
 
 //add additional functions related to defining play functions in here
-Blockly.BlockSvg.prototype.sound_wrong_block = function() {
-  this.workspace.playAudio("wrong")
+Blockly.BlockSvg.prototype.sound_wrong_block = function () {
+  this.workspace.playAudio("wrong");
 };
-Blockly.BlockSvg.prototype.sound_correct_block = function() {
-    this.workspace.playAudio("click")
+Blockly.BlockSvg.prototype.sound_correct_block = function () {
+  this.workspace.playAudio("click");
 };
 
 Blockly.Msg = {};
@@ -21793,18 +21793,25 @@ Blockly.Css.CONTENT = [
   "  cursor: default;",
   "  fill: #fff;",
   "  font-family: sans-serif;",
-  "  font-size: 11pt;",
+  "  font-size: 13pt;",   // adjusted size of text in blocks to bigger letters
   "}",
   ".blocklyNonEditableText>text {",
   "  pointer-events: none;",
   "}",
   ".blocklyNonEditableText>rect,",
   ".blocklyEditableText>rect {",
-  "  fill: #fff;",
+  "  fill: #FF5733;",
+  "  height: 1.5em;",   // adjusted height to fit 13pt text
+ "   y: 47.25%;",      // here you adjust the height of the rectangle where you can fill in values
+  "  transform: translateY(-50%);",
   "  fill-opacity: .6;",
   "}",
   ".blocklyNonEditableText>text,",
   ".blocklyEditableText>text {",
+  "  font-size: 13pt;",
+  //"  dominant-baseline: middle;",
+  //"  alignment-baseline: middle;",
+  "  text-anchor: auto;",     // position of text can be adjusterd here
   "  fill: #000;",
   "}",
   ".blocklyEditableText:hover>rect {",
@@ -21847,8 +21854,9 @@ Blockly.Css.CONTENT = [
   ".blocklyHtmlInput {",
   "  border: none;",
   "  font-family: sans-serif;",
-  "  font-size: 11pt;",
+  "  font-size: 13pt;",
   "  outline: none;",
+  "  height: 1em;",
   "  width: 100%",
   "}",
   ".blocklyMainBackground {",
@@ -21907,7 +21915,9 @@ Blockly.Css.CONTENT = [
   "  border-radius: 4px;",
   "}",
   ".blocklyDropdownMenu {",
-  "  padding: 0 !important;",
+  "  font-size: 13pt;", /* Match the font size of the block text */  
+  "  line-height: 1.5em;",
+  "  padding: 10px;",
   "}",
   ".blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,",
   ".blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {",
@@ -21926,8 +21936,8 @@ Blockly.Css.CONTENT = [
   "  outline: none;",
   "}",
   ".blocklyTreeRow {",
-  "  line-height: 22px;",
-  "  height: 22px;",
+  "  line-height: 30px;",
+  "  height: 30px;",      //Adjusted to 30 so that there is a bit easier overview
   "  padding-right: 1em;",
   "  white-space: nowrap;",
   "}",
@@ -22050,6 +22060,7 @@ Blockly.Css.CONTENT = [
   ".blocklyWidgetDiv .goog-menuitem-content {",
   "  color: #000;",
   "  font: normal 13px Arial, sans-serif;",
+  "  padding: 5px;",
   "}",
   ".blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-accel,",
   ".blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-content {",
@@ -22428,13 +22439,13 @@ Blockly.init_ = function (a) {
       "delete"
     );
     a.loadAudio_(
-        [
-          b.pathToMedia + "wrong.mp3",
-          b.pathToMedia + "wrong.ogg",
-          b.pathToMedia + "wrong.wav",
-        ],
-        "wrong"
-      );    
+      [
+        b.pathToMedia + "wrong.mp3",
+        b.pathToMedia + "wrong.ogg",
+        b.pathToMedia + "wrong.wav",
+      ],
+      "wrong"
+    );
     var d = [],
       b = function () {
         for (; d.length; ) Blockly.unbindEvent_(d.pop());
