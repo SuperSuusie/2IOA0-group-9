@@ -503,17 +503,6 @@
     // audio.src = "../../media/correctSubmission.ogg";
     // audio.src = "../../media/correctSubmission.mp3";
 
-    // function loadXmlCodeFile(xmlCode) {
-    //   var xhttp = new XMLHttpRequest();
-    //   xhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //       compareNodes(this);
-    //     };
-    //   };
-    //   xhttp.open("GET", xmlCode, true);
-    //   xhttp.send();
-    // }
-
     function loadXmlCodeFile(xmlCode) {
       return new Promise((resolve, reject) => {
         var xhttp = new XMLHttpRequest();
@@ -557,8 +546,14 @@
         loadXmlCodeFile(allXmlFiles[i]).then(result => {
         if (result) {
           console.log("Step " + (i+1) + " is completed");
-          if (i == 1) {
-            console.log("it is step 2");
+          if (i == 0) {
+            updateProgressBar(25);
+          } else if (i== 1) {
+            updateProgressBar(50);
+          } else if (i == 2) {
+            updateProgressBar(75);
+          } else if (i == 3) {
+            updateProgressBar(100);
           }
         } else {
           console.log("This is not step " + (i+1));
