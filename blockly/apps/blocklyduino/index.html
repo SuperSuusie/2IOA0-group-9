@@ -183,7 +183,8 @@ function init() {
   </script>
   <style>
     html, body {
-      height: calc(100vh - 30px);
+      /* height: calc(100vh - 30px); */
+      height: 100%;
     }
     body {
       background-color: #fff;
@@ -303,6 +304,10 @@ function init() {
             <td id="tab_arduino" class="taboff" onclick="tabClick('arduino')">Arduino</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick('xml');">XML</td>
+            <td class="tabmin">&nbsp;</td>
+            <td class = "progress-container">
+                <div class="progress-bar" id="myBar"></div>
+            </td>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
@@ -581,9 +586,9 @@ function init() {
   </script>
 
   <!--code for progress bar -->
-  <div class="progress-container">
+  <!-- <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
-  </div>
+  </div> -->
 
   <script>
     // Function to update the progress bar width
