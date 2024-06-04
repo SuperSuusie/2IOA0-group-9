@@ -558,7 +558,7 @@
         if (result) {
           console.log("Step " + (i+1) + " is completed");
           if (i == 1) {
-            console.log("it is 2");
+            console.log("it is step 2");
           }
         } else {
           console.log("This is not step " + (i+1));
@@ -662,16 +662,16 @@
       
       if (node1.nodeType !== node2.nodeType) {
         alert("Oops, something went wrong... [1]");
-        console.log(node1);
-        console.log(node2);
+        // console.log(node1);
+        // console.log(node2);
         return false;
       }
 
       if (node1.nodeType === Node.ELEMENT_NODE && node2.nodeType === Node.ELEMENT_NODE) {
         if (node1.nodeName.toLowerCase() !== node2.nodeName.toLowerCase()) {
           alert("Oops, something went wrong... [2]");
-          console.log(node1);
-          console.log(node2);
+          // console.log(node1);
+          // console.log(node2);
           return false;
         }
 
@@ -680,8 +680,8 @@
 
         if (attrs1.length !== attrs2.length) {
           alert("Oops, something went wrong... [3]");
-          console.log(node1);
-          console.log(node2);
+          // console.log(node1);
+          // console.log(node2);
           return false;
         }
 
@@ -689,8 +689,8 @@
           const attr2 = attrs2.find(attr => attr.name === attr1.name);
           if (!attr2 || attr1.value !== attr2.value) {
             alert("Oops, something went wrong... [4]");
-            console.log(node1);
-            console.log(node2);
+            // console.log(node1);
+            // console.log(node2);
             return false;
           }
         }
@@ -699,8 +699,8 @@
       if (node1.nodeType === Node.TEXT_NODE && node2.nodeType === Node.TEXT_NODE) {
         if(!ignoreTextDifferences && node1.nodeValue !== node2.nodeValue) {
           alert("Oops, something went wrong... [5]");
-          console.log(node1);
-          console.log(node2);
+          // console.log(node1);
+          // console.log(node2);
           return false;
         }
       }
@@ -710,17 +710,15 @@
 
       if (children1.length !== children2.length) {
         console.log("Oops, something went wrong... [6]");
-        console.log(children1);
-        console.log(children2);
-        console.log(node1);
-        console.log(node2);
+        // console.log(children1);
+        // console.log(children2);
         return false;
       }
 
       for (let i = 0; i < children1.length; i++) {
         if (!compareNodesIgnoreAttributes(children1[i], children2[i], ignoredAttributes)) {
-          console.log(node1);
-          console.log(node2);
+          // console.log(node1);
+          // console.log(node2);
           return false;
         }
       }
