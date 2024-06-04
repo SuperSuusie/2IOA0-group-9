@@ -337,7 +337,7 @@
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
-              <button onclick="saveCode()">Save Arduino Code</button>
+              <button onclick="arduinoFunctions()">Save Arduino Code</button>
               <button onclick="save()">Save XML</button>
               <button id="fakeload">Load XML</button>
               <input type="file" id="load" style="display: none;"/>
@@ -486,7 +486,7 @@
 
   <!-- code for popup -->
   <div class="container">
-    <div class="popup" id="popup">
+    <div class="popup" id="uploadPopup">
       <img src="../../media/thumbsUp.png">
       <h2>Great Job</h2>
       <p>You&apos;ve uploaded your code!</p>
@@ -501,7 +501,7 @@
     </div>
   </div>
   <script>
-    let popup = document.getElementById("popup");
+    let popup;
     const audio = new Audio();
 
     audio.src = "../../media/correctSubmission.wav";
@@ -543,7 +543,6 @@
     }
 
     function checkCode() {
-      // console.log(loadXmlCodeFile("xmlStep1UC2.xml"));
 
       var allXmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
       
