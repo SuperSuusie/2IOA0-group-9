@@ -503,15 +503,33 @@
     // audio.src = "../../media/correctSubmission.ogg";
     // audio.src = "../../media/correctSubmission.mp3";
 
-    function loadXmlCodeFile() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          compareNodes(this);
-        }
-      };
-      xhttp.open("GET", "xmlCodeUC2.xml", true);
-      xhttp.send();
+    // function loadXmlCodeFile(xmlCode) {
+    //   var xhttp = new XMLHttpRequest();
+    //   xhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //       compareNodes(this);
+    //     };
+    //   };
+    //   xhttp.open("GET", xmlCode, true);
+    //   xhttp.send();
+    // }
+
+    function loadXmlCodeFile(xmlCode) {
+      return new Promise((resolve, reject) => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              const result = compareNodes(this);
+              resolve(result);
+            } else {
+              reject(new Error(`Failed to load XML: Status ${this.status}`));
+            }
+          }
+        };
+        xhttp.open("GET", xmlCode, true);
+        xhttp.send();
+      });
     }
 
     function compareNodes(xml) {
@@ -519,7 +537,7 @@
       var xmlDoc = xml.responseXML;
       var x = xmlDoc.getElementsByTagName('block')[0];
       var y = xmlDom.getElementsByTagName('block')[0];
-      console.log(compareNodesIgnoreAttributes(x, y, ["id", "x", "y"]))
+      return compareNodesIgnoreAttributes(x, y, ["id", "x", "y"]);
     }
 
     //upload popup
@@ -531,7 +549,23 @@
     }
 
     function checkCode() {
-      loadXmlCodeFile();
+      // console.log(loadXmlCodeFile("xmlStep1UC2.xml"));
+
+      var allXmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+
+      for (let i = 0; i < allXmlFiles.length; i++) {
+        loadXmlCodeFile(allXmlFiles[i]).then(result => {
+        if (result) {
+          console.log("Step " + (i+1) + " is completed");
+          if (i == 1) {
+            console.log("it is 2");
+          }
+        } else {
+          console.log("This is not step " + (i+1));
+        }
+      })
+      }
+
       //popup
     }
 
@@ -675,9 +709,11 @@
       const children2 = Array.from(node2.childNodes || []);
 
       if (children1.length !== children2.length) {
-        alert("Oops, something went wrong... [6]");
+        console.log("Oops, something went wrong... [6]");
         console.log(children1);
         console.log(children2);
+        console.log(node1);
+        console.log(node2);
         return false;
       }
 
@@ -691,6 +727,9 @@
     
       audio.play();
       return true;
+      return true;
+      
+      return true;      
       
 
     }
