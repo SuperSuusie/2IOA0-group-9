@@ -21801,16 +21801,21 @@ Blockly.Css.CONTENT = [
   ".blocklyNonEditableText>rect,",
   ".blocklyEditableText>rect {",
   "  fill: #fff;",
-  "  height: 1.5em;",   // adjusted height to fit 13pt text
- "   y: 47.25%;",      // here you adjust the height of the rectangle where you can fill in values
-  "  transform: translateY(-50%);",
   "  fill-opacity: .6;",
+  "  height: 1.5em;",   // adjusted height to fit 13pt text
+ //"   y: 47.25%;",      // here you adjust the height of the rectangle where you can fill in values
+  //"  y: calc(50% - 20.4em);", /* Adjusted to vertically center, with a fine-tuned offset */
+  //"  transform: translateY(-50%);",
+  "  display: flex;",
+  "  align-items: center;",  // Vertically center
+  "  justify-content: center;", //Horizontally center, if needed
   "}",
+
   ".blocklyNonEditableText>text,",
   ".blocklyEditableText>text {",
   "  font-size: 13pt;",
-  //"  dominant-baseline: middle;",
-  //"  alignment-baseline: middle;",
+  "  dominant-baseline: middle;",
+  "  alignment-baseline: middle;",
   "  text-anchor: auto;",     // position of text can be adjusterd here
   "  fill: #000;",
   "}",
@@ -21913,7 +21918,6 @@ Blockly.Css.CONTENT = [
   "}",
   ".blocklyContextMenu {",
   "  border-radius: 4px;",
-  "  font-size: 13pt;",
   "}",
   ".blocklyDropdownMenu {",
   "  font-size: 13pt;", /* Match the font size of the block text */  
