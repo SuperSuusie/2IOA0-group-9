@@ -21564,6 +21564,11 @@ Blockly.Toolbox.prototype.populate_ = function (a) {
           case "CATEGORY":
             var h = c.createNode(g.getAttribute("name"));
             h.blocks = [];
+            // Extract and apply color if present
+            var color = g.getAttribute("colour");
+            if (color) {
+              h.htmlDiv_.style.backgroundColor = color;
+            }
             e.add(h);
             var k = g.getAttribute("custom");
             k ? (h.blocks = k) : b(g, h);
