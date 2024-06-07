@@ -1490,7 +1490,10 @@ Blockly.Blocks.controls_if = {
     });
     this.elseCount_ = this.elseifCount_ = 0;
   },
-
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
   mutationToDom: function () {
     if (!this.elseifCount_ && !this.elseCount_) return null;
     var a = document.createElement("mutation");
@@ -1585,7 +1588,6 @@ Blockly.Blocks.controls_if = {
       a = a.nextConnection && a.nextConnection.targetBlock();
     }
   },
-
 };
 Blockly.Blocks.controls_if_if = {
   init: function () {
@@ -1594,10 +1596,6 @@ Blockly.Blocks.controls_if_if = {
     this.appendStatementInput("STACK");
     this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
     this.contextMenu = !1;
-  },
-  mutationToDom: function() {
-    this.sound_wrong_block();
-    return null;
   },
 };
 Blockly.Blocks.controls_if_elseif = {
