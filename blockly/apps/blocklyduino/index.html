@@ -501,6 +501,28 @@
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
   </div>
+
+  <!-- code for check popups -->
+  <div class="container">
+    <div class="popup" id="step1Popup">
+      <h2>You have completed step 1!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="step2Popup">
+      <h2>You have completed step 2!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="step3Popup">
+      <h2>You have completed step 3!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="fullPopup">
+      <h2>You have completed use case 1!</h2>
+      <p>Upload your code to the arduino to see if it works</p>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+  </div>
+
   <script>
     let popup;
     const audio = new Audio();
@@ -543,6 +565,14 @@
       audio.play();
     }
 
+    //save arduino code popup
+    function arduinoFunctions() {
+      saveCode();
+      popup = document.getElementById("arduinoPopup");
+      openPopup();
+      audio.play();
+    }
+
     function checkCode() {
 
       var allXmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
@@ -553,28 +583,26 @@
           console.log("Step " + (i+1) + " is completed");
           if (i == 0) {
             updateProgressBar(25);
+            popup = document.getElementById("step1Popup");
+            openPopup();
           } else if (i== 1) {
             updateProgressBar(50);
+            popup = document.getElementById("step2Popup");
+            openPopup();
           } else if (i == 2) {
             updateProgressBar(75);
+            popup = document.getElementById("step3Popup");
+            openPopup();
           } else if (i == 3) {
             updateProgressBar(100);
+            popup = document.getElementById("fullPopup");
+            openPopup();
           }
         } else {
           console.log("This is not step " + (i+1));
         }
       })
       }
-
-      //popup
-    }
-
-    //save arduino code popup
-    function arduinoFunctions() {
-      saveCode();
-      popup = document.getElementById("arduinoPopup");
-      openPopup();
-      audio.play();
     }
 
     function openPopup() {
@@ -679,11 +707,6 @@
     }
 
   </script>
-
-  <!--code for progress bar -->
-  <!-- <div class="progress-container">
-    <div class="progress-bar" id="myBar"></div>
-  </div> -->
 
   <script>
     // Function to update the progress bar width
