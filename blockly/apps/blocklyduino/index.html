@@ -517,7 +517,7 @@
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
     <div class="popup" id="fullPopup">
-      <h2>You have completed use case 1!</h2>
+      <h2>You have completed the use case!</h2>
       <p>Upload your code to the arduino to see if it works</p>
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
@@ -573,27 +573,36 @@
       audio.play();
     }
 
+    //code to check each step of each Use Case
     function checkCode() {
 
-      var allXmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+      var allXmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml", "xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
       
       for (let i = 0; i < allXmlFiles.length; i++) {
         loadXmlCodeFile(allXmlFiles[i]).then(result => {
         if (result) {
           console.log("Step " + (i+1) + " is completed");
           if (i == 0) {
+            updateProgressBar(33);
+            popup = document.getElementById("step1Popup");
+            openPopup();
+          } else if (i == 1) {
+            updateProgressBar(66);
+            popup = document.getElementById("step2Popup");
+            openPopup();
+          } else if (i == 3) {
             updateProgressBar(25);
             popup = document.getElementById("step1Popup");
             openPopup();
-          } else if (i== 1) {
+          } else if (i== 4) {
             updateProgressBar(50);
             popup = document.getElementById("step2Popup");
             openPopup();
-          } else if (i == 2) {
+          } else if (i == 5) {
             updateProgressBar(75);
             popup = document.getElementById("step3Popup");
             openPopup();
-          } else if (i == 3) {
+          } else if (i == 2 || i == 6) {
             updateProgressBar(100);
             popup = document.getElementById("fullPopup");
             openPopup();
@@ -724,17 +733,13 @@
       const shouldIgnore = (attr) => ignoredAttributes.includes(attr.name);
       
       if (node1.nodeType !== node2.nodeType) {
-        alert("Oops, something went wrong... [1]");
-        // console.log(node1);
-        // console.log(node2);
+        console.log("Oops, something went wrong... [1]");
         return false;
       }
 
       if (node1.nodeType === Node.ELEMENT_NODE && node2.nodeType === Node.ELEMENT_NODE) {
         if (node1.nodeName.toLowerCase() !== node2.nodeName.toLowerCase()) {
-          alert("Oops, something went wrong... [2]");
-          // console.log(node1);
-          // console.log(node2);
+          console.log("Oops, something went wrong... [2]");
           return false;
         }
 
@@ -742,18 +747,14 @@
         const attrs2 = Array.from(node2.attributes || []).filter(attr => !shouldIgnore(attr));
 
         if (attrs1.length !== attrs2.length) {
-          alert("Oops, something went wrong... [3]");
-          // console.log(node1);
-          // console.log(node2);
+          console.log("Oops, something went wrong... [3]");
           return false;
         }
 
         for (let attr1 of attrs1) {
           const attr2 = attrs2.find(attr => attr.name === attr1.name);
           if (!attr2 || attr1.value !== attr2.value) {
-            alert("Oops, something went wrong... [4]");
-            // console.log(node1);
-            // console.log(node2);
+            console.log("Oops, something went wrong... [4]");
             return false;
           }
         }
@@ -761,9 +762,7 @@
 
       if (node1.nodeType === Node.TEXT_NODE && node2.nodeType === Node.TEXT_NODE) {
         if(!ignoreTextDifferences && node1.nodeValue !== node2.nodeValue) {
-          alert("Oops, something went wrong... [5]");
-          // console.log(node1);
-          // console.log(node2);
+          console.log("Oops, something went wrong... [5]");
           return false;
         }
       }
@@ -773,24 +772,17 @@
 
       if (children1.length !== children2.length) {
         console.log("Oops, something went wrong... [6]");
-        // console.log(children1);
-        // console.log(children2);
         return false;
       }
 
       for (let i = 0; i < children1.length; i++) {
         if (!compareNodesIgnoreAttributes(children1[i], children2[i], ignoredAttributes)) {
-          // console.log(node1);
-          // console.log(node2);
           return false;
         }
       }
-    
-      // audio.play();
       
       return true;      
       
-
     }
 
   </script>
