@@ -1490,6 +1490,7 @@ Blockly.Blocks.controls_if = {
     });
     this.elseCount_ = this.elseifCount_ = 0;
   },
+
   mutationToDom: function () {
     if (!this.elseifCount_ && !this.elseCount_) return null;
     var a = document.createElement("mutation");
@@ -1584,10 +1585,7 @@ Blockly.Blocks.controls_if = {
       a = a.nextConnection && a.nextConnection.targetBlock();
     }
   },
-  mutationToDom: function() {
-    this.sound_correct_block();
-    return null;
-  },
+
 };
 Blockly.Blocks.controls_if_if = {
   init: function () {
@@ -1613,10 +1611,7 @@ Blockly.Blocks.controls_if_elseif = {
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
     this.contextMenu = !1;
   },
-  mutationToDom: function() {
-    this.sound_wrong_block();
-    return null;
-  },
+
 };
 Blockly.Blocks.controls_if_else = {
   init: function () {
@@ -1628,10 +1623,7 @@ Blockly.Blocks.controls_if_else = {
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
     this.contextMenu = !1;
   },
-  mutationToDom: function() {
-    this.sound_wrong_block();
-    return null;
-  },
+
 };
 Blockly.Blocks.logic_compare = {
   init: function () {
