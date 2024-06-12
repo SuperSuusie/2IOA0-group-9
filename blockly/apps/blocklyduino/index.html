@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html manifest=node.manifest>
+
 <head>
   <meta charset="utf-8">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>BlocklyDuino</title>
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
   <script type="text/javascript" src="../../blocks_compressed.js"></script>
@@ -17,181 +19,185 @@
   <link rel="stylesheet" href="../../core/progress_bar.css">
   <link rel="stylesheet" href="../../core/hint_button.css">
   <script>
+    /**
+     * List of tab names. 
+     * @private
+     */
+    var TABS_ = ['blocks', 'arduino', 'xml'];
 
+    var selected = 'blocks';
 
-/**
- * List of tab names. 
- * @private
- */
-var TABS_ = ['blocks', 'arduino', 'xml'];
+    /**
+     * Switch the visible pane when a tab is clicked.
+     * @param {string} clickedName Name of tab clicked.
+     */
+    function tabClick(clickedName) {
+      // If the XML tab was open, save and render the content.
+      if (document.getElementById('tab_xml').className == 'tabon') {
+        var xmlTextarea = document.getElementById('content_xml');
+        var xmlText = xmlTextarea.value;
+        var xmlDom = null;
+        try {
+          xmlDom = Blockly.Xml.textToDom(xmlText);
+        } catch (e) {
+          var q =
+            window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
+          if (!q) {
+            // Leave the user on the XML tab.
+            return;
+          }
+        }
+        if (xmlDom) {
+          Blockly.mainWorkspace.clear();
+          Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+        }
+      }
 
-var selected = 'blocks';
+      if (document.getElementById('tab_blocks').className == 'tabon') {
+        Blockly.mainWorkspace.setVisible(false);
+      }
+      // Deselect all tabs and hide all panes.
+      for (var i = 0; i < TABS_.length; i++) {
+        var name = TABS_[i];
+        document.getElementById('tab_' + name).className = 'taboff';
+        document.getElementById('content_' + name).style.visibility = 'hidden';
+      }
 
-/**
- * Switch the visible pane when a tab is clicked.
- * @param {string} clickedName Name of tab clicked.
- */
-function tabClick(clickedName) {
-  // If the XML tab was open, save and render the content.
-  if (document.getElementById('tab_xml').className == 'tabon') {
-    var xmlTextarea = document.getElementById('content_xml');
-    var xmlText = xmlTextarea.value;
-    var xmlDom = null;
-    try {
-      xmlDom = Blockly.Xml.textToDom(xmlText);
-    } catch (e) {
-      var q =
-          window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
-      if (!q) {
-        // Leave the user on the XML tab.
-        return;
+      // Select the active tab.
+      selected = clickedName;
+      document.getElementById('tab_' + clickedName).className = 'tabon';
+      // Show the selected pane.
+      document.getElementById('content_' + clickedName).style.visibility =
+        'visible';
+      renderContent();
+      if (clickedName == 'blocks') {
+        Blockly.mainWorkspace.setVisible(true);
+      }
+      Blockly.fireUiEvent(window, 'resize');
+    }
+
+    /**
+     * Populate the currently selected pane with content generated from the blocks.
+     */
+    function renderContent() {
+      var content = document.getElementById('content_' + selected);
+      // Initialize the pane.
+      if (content.id == 'content_blocks') {
+        // If the workspace was changed by the XML tab, Firefox will have performed
+        // an incomplete rendering due to Blockly being invisible.  Rerender.
+        Blockly.mainWorkspace.render();
+      } else if (content.id == 'content_xml') {
+        var xmlTextarea = document.getElementById('content_xml');
+        var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        xmlTextarea.value = xmlText;
+        xmlTextarea.focus();
+        /*} else if (content.id == 'content_javascript') {
+          content.innerHTML = Blockly.JavaScript.workspaceToCode();
+        } else if (content.id == 'content_dart') {
+          content.innerHTML = Blockly.Dart.workspaceToCode();
+        } else if (content.id == 'content_python') {
+          content.innerHTML = Blockly.Python.workspaceToCode();*/
+      } else if (content.id == 'content_arduino') {
+        //content.innerHTML = Blockly.Arduino.workspaceToCode();
+        var arduinoTextarea = document.getElementById('content_arduino');
+        arduinoTextarea.value = Blockly.Arduino.workspaceToCode();
+        arduinoTextarea.focus();
       }
     }
-    if (xmlDom) {
-      Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+
+    /**
+     * Compute the absolute coordinates and dimensions of an HTML element.
+     * @param {!Element} element Element to match.
+     * @return {!Object} Contains height, width, x, and y properties.
+     * @private
+     */
+    function getBBox_(element) {
+      var height = element.offsetHeight;
+      var width = element.offsetWidth;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      return {
+        height: height,
+        width: width,
+        x: x,
+        y: y
+      };
     }
-  }
 
-  if (document.getElementById('tab_blocks').className == 'tabon') {
-    Blockly.mainWorkspace.setVisible(false);
-  }
-  // Deselect all tabs and hide all panes.
-  for (var i = 0; i < TABS_.length; i++) {
-    var name = TABS_[i];
-    document.getElementById('tab_' + name).className = 'taboff';
-    document.getElementById('content_' + name).style.visibility = 'hidden';
-  }
+    /**
+     * Initialize Blockly.  Called on page load.
+     */
+    function init() {
+      //window.onbeforeunload = function() {
+      //  return 'Leaving this page will result in the loss of your work.';
+      //};
 
- // Select the active tab.
-  selected = clickedName;
-  document.getElementById('tab_' + clickedName).className = 'tabon';
-  // Show the selected pane.
-  document.getElementById('content_' + clickedName).style.visibility =
-      'visible';
-  renderContent();
-  if (clickedName == 'blocks') {
-    Blockly.mainWorkspace.setVisible(true);
-  }
-  Blockly.fireUiEvent(window, 'resize');
-}
-
-/**
- * Populate the currently selected pane with content generated from the blocks.
- */
-function renderContent() {
-  var content = document.getElementById('content_' + selected);
-  // Initialize the pane.
-  if (content.id == 'content_blocks') {
-    // If the workspace was changed by the XML tab, Firefox will have performed
-    // an incomplete rendering due to Blockly being invisible.  Rerender.
-    Blockly.mainWorkspace.render();
-  } else if (content.id == 'content_xml') {
-    var xmlTextarea = document.getElementById('content_xml');
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    xmlTextarea.value = xmlText;
-    xmlTextarea.focus();
-  /*} else if (content.id == 'content_javascript') {
-    content.innerHTML = Blockly.JavaScript.workspaceToCode();
-  } else if (content.id == 'content_dart') {
-    content.innerHTML = Blockly.Dart.workspaceToCode();
-  } else if (content.id == 'content_python') {
-    content.innerHTML = Blockly.Python.workspaceToCode();*/
-  } else if (content.id == 'content_arduino') {
-    //content.innerHTML = Blockly.Arduino.workspaceToCode();
-    var arduinoTextarea = document.getElementById('content_arduino');
-    arduinoTextarea.value = Blockly.Arduino.workspaceToCode();
-    arduinoTextarea.focus();
-  }
-}
-
-/**
- * Compute the absolute coordinates and dimensions of an HTML element.
- * @param {!Element} element Element to match.
- * @return {!Object} Contains height, width, x, and y properties.
- * @private
- */
-function getBBox_(element) {
-  var height = element.offsetHeight;
-  var width = element.offsetWidth;
-  var x = 0;
-  var y = 0;
-  do {
-    x += element.offsetLeft;
-    y += element.offsetTop;
-    element = element.offsetParent;
-  } while (element);
-  return {
-    height: height,
-    width: width,
-    x: x,
-    y: y
-  };
-}
-
-/**
- * Initialize Blockly.  Called on page load.
- */
-function init() {
-  //window.onbeforeunload = function() {
-  //  return 'Leaving this page will result in the loss of your work.';
-  //};
-
-  var container = document.getElementById('content_area');
-  var onresize = function(e) {
-    var bBox = getBBox_(container);
-    for (var i = 0; i < TABS_.length; i++) {
-      var el = document.getElementById('content_' + TABS_[i]);
-      el.style.top = bBox.y + 'px';
-      el.style.left = bBox.x + 'px';
-      // Height and width need to be set, read back, then set again to
-      // compensate for scrollbars.
-      el.style.height = bBox.height + 'px';
-      el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
-      el.style.width = bBox.width + 'px';
-      el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
-    }
-    // Make the 'Blocks' tab line up with the toolbox.
-    if (Blockly.mainWorkspace.toolbox_.width) {
-      document.getElementById('tab_blocks').style.minWidth =
-          (Blockly.mainWorkspace.toolbox_.width - 38) + 'px';
+      var container = document.getElementById('content_area');
+      var onresize = function (e) {
+        var bBox = getBBox_(container);
+        for (var i = 0; i < TABS_.length; i++) {
+          var el = document.getElementById('content_' + TABS_[i]);
+          el.style.top = bBox.y + 'px';
+          el.style.left = bBox.x + 'px';
+          // Height and width need to be set, read back, then set again to
+          // compensate for scrollbars.
+          el.style.height = bBox.height + 'px';
+          el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
+          el.style.width = bBox.width + 'px';
+          el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
+        }
+        // Make the 'Blocks' tab line up with the toolbox.
+        if (Blockly.mainWorkspace.toolbox_.width) {
+          document.getElementById('tab_blocks').style.minWidth =
+            (Blockly.mainWorkspace.toolbox_.width - 38) + 'px';
           // Account for the 19 pixel margin and on each side.
+        }
+      };
+      window.addEventListener('resize', onresize, false);
+
+      var toolbox = document.getElementById('toolbox');
+      Blockly.inject(document.getElementById('content_blocks'),
+        {
+          grid:
+          {
+            spacing: 25,
+            length: 3,
+            colour: '#ccc',
+            snap: true
+          },
+          media: '../../media/',
+          toolbox: toolbox
+        });
+
+      auto_save_and_restore_blocks();
+
+      //load from url parameter (single param)
+      //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
+      var dest = unescape(location.search.replace(/^.*\=/, '')).replace(/\+/g, " ");
+      if (dest) {
+        load_by_url(dest);
+      }
     }
-  };
-  window.addEventListener('resize', onresize, false);
-
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('content_blocks'),
-      {grid:
-          {spacing: 25,
-           length: 3,
-           colour: '#ccc',
-           snap: true},
-       media: '../../media/',
-       toolbox: toolbox});
-
-  auto_save_and_restore_blocks();
-
-  //load from url parameter (single param)
-  //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
-  var dest = unescape(location.search.replace(/^.*\=/, '')).replace(/\+/g, " ");
-  if(dest){
-    load_by_url(dest);
-  }
-}
   </script>
   <style>
     html, body {
       /* height: calc(100vh - 30px); */
       height: 100%;
     }
+
     body {
       background-color: #fff;
       font-family: sans-serif;
       margin: 0;
       overflow: hidden;
     }
+
     h1 {
       font-weight: normal;
       font-size: 140%;
@@ -204,23 +210,28 @@ function init() {
       border: 1px solid #ccc;
       font-size: 13pt;
     }
+
     td.tabon {
       border-bottom-color: #ddd !important;
       background-color: #ddd;
       padding: 5px 19px;
     }
+
     td.taboff {
       cursor: pointer;
       padding: 5px 19px;
     }
+
     td.taboff:hover {
       background-color: #eee;
     }
+
     td.tabmin {
       border-top-style: none !important;
       border-left-style: none !important;
       border-right-style: none !important;
     }
+
     td.tabmax {
       border-top-style: none !important;
       border-left-style: none !important;
@@ -235,10 +246,12 @@ function init() {
       padding: 0;
       border: none;
     }
+
     td {
       padding: 0;
       vertical-align: top;
     }
+
     .content {
       visibility: hidden;
       margin: 0;
@@ -246,15 +259,19 @@ function init() {
       position: absolute;
       direction: ltr;
     }
+
     pre.content {
       overflow: scroll;
     }
+
     #content_blocks {
       padding: 0;
     }
+
     .blocklySvg {
       border-top: none !important;
     }
+
     #content_xml {
       resize: none;
       outline: none;
@@ -262,6 +279,7 @@ function init() {
       font-family: monospace;
       overflow: scroll;
     }
+
     button {
       padding: 1px 1em;
       font-size: 13pt;
@@ -270,24 +288,29 @@ function init() {
       background-color: #eee;
       color: black;
     }
+
     button.launch {
       border: 1px solid #d43;
       background-color: #d43;
       color: white;
     }
+
     button:active {
       border: 1px solid blue !important;
     }
+
     button:hover {
       box-shadow: 2px 2px 5px #888;
     }
   </style>
 </head>
+
 <body onload="init()">
   <table height="100%" width="100%">
     <tr>
       <td>
-        <h1><a href="https://github.com/gasolin/BlocklyDuino/wiki">BlocklyDuino</a> &gt; web-based visual programming editor for arduino</h1>
+        <h1><a href="https://github.com/gasolin/BlocklyDuino/wiki">BlocklyDuino</a> &gt; web-based visual programming
+          editor for arduino</h1>
       </td>
     </tr>
     <tr>
@@ -311,10 +334,11 @@ function init() {
             </td>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
+              <button type="button" onclick="checkCode()">Check</button>
               <button type="button" onclick="uploadFunctions()">Upload</button>
               <button type="button" onclick="resetClick()">Reset</button>
               <button onclick="discard()">Discard</button>
-              <button onclick="saveCode()">Save Arduino Code</button>
+              <button onclick="arduinoFunctions()">Save Arduino Code</button>
               <button onclick="save()">Save XML</button>
               <button id="fakeload">Load XML</button>
               <input type="file" id="load" style="display: none;"/>
@@ -463,35 +487,142 @@ function init() {
 
   <!-- code for popup -->
   <div class="container">
-    <div class="popup" id="popup">
+    <div class="popup" id="uploadPopup">
       <img src="../../media/thumbsUp.png">
       <h2>Great Job</h2>
       <p>You&apos;ve uploaded your code!</p>
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
+  <!-- Code for saving arduino code popup -->
+    <div class="popup" id="arduinoPopup">
+      <img src="../../media/thumbsUp.png">
+      <h2>You&apos;ve saved the arduino code</h2>
+      <p>Well done, keep working on it!</p>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
   </div>
+
+  <!-- code for check popups -->
+  <div class="container">
+    <div class="popup" id="step1Popup">
+      <h2>You have completed step 1!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="step2Popup">
+      <h2>You have completed step 2!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="step3Popup">
+      <h2>You have completed step 3!</h2>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+    <div class="popup" id="fullPopup">
+      <h2>You have completed the use case!</h2>
+      <p>Upload your code to the arduino to see if it works</p>
+      <button type="button" onclick="closePopup()">Continue</button>
+    </div>
+  </div>
+
   <script>
-    let popup = document.getElementById("popup");
+    let popup;
     const audio = new Audio();
-    audio.src = "../../media/happySound.wav";
-    audio.src = "../../media/happySound.ogg";
-    audio.src = "../../media/happySound.mp3";
-    
-    function uploadFunctions(){
+
+    audio.src = "../../media/correctSubmission.wav";
+    // audio.src = "../../media/correctSubmission.ogg";
+    // audio.src = "../../media/correctSubmission.mp3";
+
+    function loadXmlCodeFile(xmlCode) {
+      return new Promise((resolve, reject) => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              const result = compareNodes(this);
+              resolve(result);
+            } else {
+              reject(new Error(`Failed to load XML: Status ${this.status}`));
+            }
+          }
+        };
+        xhttp.open("GET", xmlCode, true);
+        xhttp.send();
+      });
+    }
+
+    function compareNodes(xml) {
+      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlDoc = xml.responseXML;
+      var x = xmlDoc.getElementsByTagName('block')[0];
+      var y = xmlDom.getElementsByTagName('block')[0];
+      return compareNodesIgnoreAttributes(x, y, ["id", "x", "y"]);
+    }
+
+    //upload popup
+    function uploadFunctions() {
       uploadClick();
+      popup = document.getElementById("uploadPopup");
       openPopup();
       audio.play();
     }
-    
-    function openPopup(){
+
+    //save arduino code popup
+    function arduinoFunctions() {
+      saveCode();
+      popup = document.getElementById("arduinoPopup");
+      openPopup();
+      audio.play();
+    }
+
+    //code to check each step of each Use Case
+    function checkCode() {
+
+      var allXmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml", "xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+      
+      for (let i = 0; i < allXmlFiles.length; i++) {
+        loadXmlCodeFile(allXmlFiles[i]).then(result => {
+        if (result) {
+          console.log("Step " + (i+1) + " is completed");
+          if (i == 0) {
+            updateProgressBar(33);
+            popup = document.getElementById("step1Popup");
+            openPopup();
+          } else if (i == 1) {
+            updateProgressBar(66);
+            popup = document.getElementById("step2Popup");
+            openPopup();
+          } else if (i == 3) {
+            updateProgressBar(25);
+            popup = document.getElementById("step1Popup");
+            openPopup();
+          } else if (i== 4) {
+            updateProgressBar(50);
+            popup = document.getElementById("step2Popup");
+            openPopup();
+          } else if (i == 5) {
+            updateProgressBar(75);
+            popup = document.getElementById("step3Popup");
+            openPopup();
+          } else if (i == 2 || i == 6) {
+            updateProgressBar(100);
+            popup = document.getElementById("fullPopup");
+            openPopup();
+          }
+        } else {
+          console.log("This is not step " + (i+1));
+        }
+      })
+      }
+    }
+
+    function openPopup() {
       popup.classList.add("open-popup");
     }
 
-    function closePopup(){
+    function closePopup() {
       popup.classList.remove("open-popup");
     }
   </script>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
 
   <!-- code for hint popup -->
@@ -586,11 +717,6 @@ function init() {
 
   </script>
 
-  <!--code for progress bar -->
-  <!-- <div class="progress-container">
-    <div class="progress-bar" id="myBar"></div>
-  </div> -->
-
   <script>
     // Function to update the progress bar width
     function updateProgressBar(progress) {
@@ -598,8 +724,72 @@ function init() {
       progressBar.style.width = progress + "%";
     }
 
-    updateProgressBar(70);
+    updateProgressBar(0);
+  </script>
+
+  <script>
+
+    function compareNodesIgnoreAttributes(node1, node2, ignoredAttributes = [], ignoreTextDifferences = false) {
+      const shouldIgnore = (attr) => ignoredAttributes.includes(attr.name);
+      
+      if (node1.nodeType !== node2.nodeType) {
+        console.log("Oops, something went wrong... [1]");
+        return false;
+      }
+
+      if (node1.nodeType === Node.ELEMENT_NODE && node2.nodeType === Node.ELEMENT_NODE) {
+        if (node1.nodeName.toLowerCase() !== node2.nodeName.toLowerCase()) {
+          console.log("Oops, something went wrong... [2]");
+          return false;
+        }
+
+        const attrs1 = Array.from(node1.attributes || []).filter(attr => !shouldIgnore(attr));
+        const attrs2 = Array.from(node2.attributes || []).filter(attr => !shouldIgnore(attr));
+
+        if (attrs1.length !== attrs2.length) {
+          console.log("Oops, something went wrong... [3]");
+          return false;
+        }
+
+        for (let attr1 of attrs1) {
+          const attr2 = attrs2.find(attr => attr.name === attr1.name);
+          if (!attr2 || attr1.value !== attr2.value) {
+            console.log("Oops, something went wrong... [4]");
+            return false;
+          }
+        }
+      }
+
+      if (node1.nodeType === Node.TEXT_NODE && node2.nodeType === Node.TEXT_NODE) {
+        if(!ignoreTextDifferences && node1.nodeValue !== node2.nodeValue) {
+          console.log("Oops, something went wrong... [5]");
+          return false;
+        }
+      }
+
+      const children1 = Array.from(node1.childNodes || []);
+      const children2 = Array.from(node2.childNodes || []);
+
+      if (children1.length !== children2.length) {
+        console.log("Oops, something went wrong... [6]");
+        return false;
+      }
+
+      for (let i = 0; i < children1.length; i++) {
+        if (!compareNodesIgnoreAttributes(children1[i], children2[i], ignoredAttributes)) {
+          return false;
+        }
+      }
+      
+      return true;      
+      
+    }
 
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
