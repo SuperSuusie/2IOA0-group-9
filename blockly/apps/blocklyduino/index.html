@@ -729,32 +729,31 @@
 
   </script>
 
-<div class="container">
-  <div class="popup" id="openHomescreen">
+  <div class="homescreen-popup" id="homescreenPopup">
     <h3>Which use case do you want to work on?</h3>
     <button type="button" onclick="goToUCSound()">Sound Sensor</button>
     <button type="button" onclick="goToUCButton()">Button</button>
   </div>
-</div>
+
 
   <script>
     var whichUseCase;
-    let popupHomescreen = document.getElementById("openHomescreen");
-    popupHomescreen.classList.add("open-popup");
+    let popupHomescreen = document.getElementById("homescreenPopup");
+    popupHomescreen.classList.add("open-homescreen-popup");
 
     function goToHomescreen() {
-      popupHomescreen.classList.add("open-popup");
+      popupHomescreen.classList.add("open-homescreen-popup");
     }
 
     function goToUCSound() {
       whichUseCase = "SOUND"
-      popupHomescreen.classList.remove("open-popup");
+      popupHomescreen.classList.remove("open-homescreen-popup");
       console.log(whichUseCase);
     }
 
     function goToUCButton() {
       whichUseCase = "BUTTON"
-      popupHomescreen.classList.remove("open-popup");
+      popupHomescreen.classList.remove("open-homescreen-popup");
       console.log(whichUseCase);
     }
   </script>
