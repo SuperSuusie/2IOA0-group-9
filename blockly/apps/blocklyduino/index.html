@@ -735,10 +735,24 @@
     <button type="button" onclick="goToUCButton()">Button</button>
   </div>
 
+  <div class="homescreen-popup" id="soundPopup">
+    <h3>The goal of the sound use case is...</h3>
+    <button type="button" onclick="backSound()">Back</button>
+    <button type="button" onclick="startSound()">Start</button>
+  </div>
+
+  <div class="homescreen-popup" id="buttonPopup">
+    <h3>The goal of the button use case is...</h3>
+    <button type="button" onclick="backButton()">Back</button>
+    <button type="button" onclick="startButton()">Start</button>
+  </div>
+
 
   <script>
     var whichUseCase;
     let popupHomescreen = document.getElementById("homescreenPopup");
+    let popupSound = document.getElementById("soundPopup");
+    let popupButton = document.getElementById("buttonPopup");
     popupHomescreen.classList.add("open-homescreen-popup");
 
     function goToHomescreen() {
@@ -746,15 +760,35 @@
     }
 
     function goToUCSound() {
-      whichUseCase = "SOUND"
       popupHomescreen.classList.remove("open-homescreen-popup");
+      popupSound.classList.add("open-homescreen-popup");
+    }
+
+    function startSound() {
+      whichUseCase = "SOUND";
       console.log(whichUseCase);
+      popupSound.classList.remove("open-homescreen-popup");
+    }
+
+    function backSound() {
+      popupSound.classList.remove("open-homescreen-popup");
+      popupHomescreen.classList.add("open-homescreen-popup");
     }
 
     function goToUCButton() {
-      whichUseCase = "BUTTON"
       popupHomescreen.classList.remove("open-homescreen-popup");
+      popupButton.classList.add("open-homescreen-popup");
+    }
+
+    function startButton() {
+      whichUseCase = "BUTTON";
       console.log(whichUseCase);
+      popupButton.classList.remove("open-homescreen-popup")
+    }
+
+    function backButton() {
+      popupButton.classList.remove("open-homescreen-popup");
+      popupHomescreen.classList.add("open-homescreen-popup");
     }
   </script>
 
