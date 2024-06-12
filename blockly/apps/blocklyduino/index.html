@@ -332,6 +332,9 @@
             <td class = "progress-container">
                 <div class="progress-bar" id="myBar"></div>
             </td>
+            <div class="homescreen">
+              <button class="homeButton" onclick="goToHomescreen()">Homescreen</button>
+            </div>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="checkCode()">Check</button>
@@ -574,12 +577,21 @@
     }
 
     //code to check each step of each Use Case
-    function checkCode() {
+    var xmlFiles;
 
-      var allXmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml", "xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+    function checkCode() {
+      if (whichUseCase == "SOUND") {
+        xmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+      } else if (whichUseCase == "BUTTON") {
+        xmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml"];
+      } else {
+        alert("Please first select a use case in the home screen");
+      }
       
-      for (let i = 0; i < allXmlFiles.length; i++) {
-        loadXmlCodeFile(allXmlFiles[i]).then(result => {
+      updateProgressBar(0);
+      for (let i = 0; i < xmlFiles.length; i++) {
+        console.log(xmlFiles);
+        loadXmlCodeFile(xmlFiles[i]).then(result => {
         if (result) {
           console.log("Step " + (i+1) + " is completed");
           if (i == 0) {
@@ -715,6 +727,36 @@
       casetwo.classList.remove("open-popup");
     }
 
+  </script>
+
+<div class="container">
+  <div class="popup" id="openHomescreen">
+    <h3>Which use case do you want to work on?</h3>
+    <button type="button" onclick="goToUCSound()">Sound Sensor</button>
+    <button type="button" onclick="goToUCButton()">Button</button>
+  </div>
+</div>
+
+  <script>
+    var whichUseCase;
+    let popupHomescreen = document.getElementById("openHomescreen");
+    popupHomescreen.classList.add("open-popup");
+
+    function goToHomescreen() {
+      popupHomescreen.classList.add("open-popup");
+    }
+
+    function goToUCSound() {
+      whichUseCase = "SOUND"
+      popupHomescreen.classList.remove("open-popup");
+      console.log(whichUseCase);
+    }
+
+    function goToUCButton() {
+      whichUseCase = "BUTTON"
+      popupHomescreen.classList.remove("open-popup");
+      console.log(whichUseCase);
+    }
   </script>
 
   <script>
