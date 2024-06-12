@@ -308,9 +308,9 @@
 <body onload="init()">
   <table height="100%" width="100%">
     <tr>
-      <td>
-        <h1><a href="https://github.com/gasolin/BlocklyDuino/wiki">BlocklyDuino</a> &gt; web-based visual programming
-          editor for arduino</h1>
+      <td style="white-space: nowrap;">
+        <img class="img3" src="../../media/logo3.png" style="vertical-align: middle;">
+        <button class="homeButton" onclick="goToHomescreen()" style="vertical-align: middle;">Homescreen</button>
       </td>
     </tr>
     <tr>
@@ -332,9 +332,6 @@
             <td class = "progress-container">
                 <div class="progress-bar" id="myBar"></div>
             </td>
-            <div class="homescreen">
-              <button class="homeButton" onclick="goToHomescreen()">Homescreen</button>
-            </div>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
               <button type="button" onclick="checkCode()">Check</button>
@@ -730,6 +727,7 @@
   </script>
 
   <div class="homescreen-popup" id="homescreenPopup">
+    <img class="img2" src="../../media/logo.png">
     <h3>Which use case do you want to work on?</h3>
     <button type="button" onclick="goToUCSound()">Sound Sensor</button>
     <button type="button" onclick="goToUCButton()">Button</button>
