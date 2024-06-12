@@ -640,10 +640,40 @@ function init() {
 
   </script>
 
+
   <!--code for progress bar -->
   <!-- <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
   </div> -->
+
+  <div class="homescreen-popup" id="homescreenPopup">
+    <h3>Which use case do you want to work on?</h3>
+    <button type="button" onclick="goToUCSound()">Sound Sensor</button>
+    <button type="button" onclick="goToUCButton()">Button</button>
+  </div>
+
+
+  <script>
+    var whichUseCase;
+    let popupHomescreen = document.getElementById("homescreenPopup");
+    popupHomescreen.classList.add("open-homescreen-popup");
+
+    function goToHomescreen() {
+      popupHomescreen.classList.add("open-homescreen-popup");
+    }
+
+    function goToUCSound() {
+      whichUseCase = "SOUND"
+      popupHomescreen.classList.remove("open-homescreen-popup");
+      console.log(whichUseCase);
+    }
+
+    function goToUCButton() {
+      whichUseCase = "BUTTON"
+      popupHomescreen.classList.remove("open-homescreen-popup");
+      console.log(whichUseCase);
+    }
+  </script>
 
   <script>
     // Function to update the progress bar width
