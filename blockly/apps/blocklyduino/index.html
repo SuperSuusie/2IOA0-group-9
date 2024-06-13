@@ -646,7 +646,7 @@
   <div class="container">
     <div class="popup" id="usecaseone">
       <h3>Hint 1:</h3>
-      <h4>Remember to first define the sound sensor using the "set" block!</h4>
+      <h4>Remember to first define the sound sensor using the "set" block, with the name "soundStateCurrent"!</h4>
       <button type="button" onclick="CaseOneHintTwo()">Another hint</button>
       <button type="button" onclick="closeHintPopupOne()">Try again!</button>
     </div>
@@ -729,8 +729,10 @@
   <div class="homescreen-popup" id="homescreenPopup">
     <img class="img2" src="../../media/logo.png">
     <h3>Which use case do you want to work on?</h3>
-    <button type="button" onclick="goToUCSound()">Sound Sensor</button>
-    <button type="button" onclick="goToUCButton()">Button</button>
+    <div class="buttons-container">
+      <button type="button" onclick="goToUCSound()">Sound Sensor</button>
+      <button type="button" onclick="goToUCButton()">Button</button>
+    </div>
   </div>
 
   <div class="homescreen-popup" id="soundPopup">
@@ -740,8 +742,10 @@
     <p>Step 2: if the sound sensor reaches the threshold of 100 or higher, the first light on pin 13 should turn on. After 1 second it should automatically turn off again.</p>
     <p>Step 3: if the sound sensor reaches the threshold of 400 or higher, the second light on pin 12 should turn on. After 1 second it should automatically turn off again.</p>
     <p>Step 4: if the sound sensor reaches the threshold of 700 or higher, the second light on pin 11 should turn on. After 1 second it should automatically turn off again.</p>
-    <button type="button" onclick="backSound()">Back</button>
-    <button type="button" onclick="startSound()">Start</button>
+    <div class="buttons-container">
+      <button type="button" onclick="backSound()">Back</button>
+      <button type="button" onclick="startSound()">Start</button>
+    </div>
   </div>
 
   <div class="homescreen-popup" id="buttonPopup">

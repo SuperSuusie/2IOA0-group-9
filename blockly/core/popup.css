@@ -127,6 +127,12 @@
     align-items: center;
 }
 
+.button-container{
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px 0;
+}
+
 .open-homescreen-popup {
     visibility: visible;
     opacity: 1;
