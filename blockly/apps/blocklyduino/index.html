@@ -647,14 +647,6 @@
 
   <!-- code for hint popup -->
   <div class="container">
-    <div class="popup" id="openhintpopup">
-      <h3>Which use case are you working on?</h3>
-      <button type="button" onclick="useCaseOne()">Sound Sensor</button>
-      <button type="button" onclick="useCaseTwo()">Button</button>
-    </div>
-  </div>
-
-  <div class="container">
     <div class="popup" id="usecaseone">
       <h3>Hint 1:</h3>
       <h4>Remember to first define the sound sensor using the "set" block, with the name "soundStateCurrent"!</h4>
@@ -689,18 +681,22 @@
   </div>
 
   <script>   
-  	let hintpopup = document.getElementById("openhintpopup");
     let caseone = document.getElementById("usecaseone");
     let caseone_hinttwo = document.getElementById("usecaseone_hinttwo");
     let caseone_hintthree = document.getElementById("usecaseone_hintthree");
     let casetwo = document.getElementById("usecasetwo");
 
     function openHint(){
-      hintpopup.classList.add("open-popup");
+      if (whichUseCase == "SOUND") {
+        useCaseOne();
+      } else if (whichUseCase == "BUTTON") {
+        useCaseTwo();
+      } else {
+        alert("Please first select a use case in the home screen");
+      }
     }
 
     function useCaseOne(){
-      hintpopup.classList.remove("open-popup");
       caseone.classList.add("open-popup");
     }
 
@@ -723,7 +719,6 @@
     }
 
     function useCaseTwo(){
-      hintpopup.classList.remove("open-popup");
       casetwo.classList.add("open-popup");
     }
     
