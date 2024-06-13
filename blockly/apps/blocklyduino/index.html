@@ -579,15 +579,35 @@
     function checkCode() {
       if (whichUseCase == "SOUND") {
         xmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+        for (let i = 0; i < xmlFiles.length; i++) {
+        loadXmlCodeFile(xmlFiles[i]).then(result => {
+        if (result) {
+          console.log("Step " + (i+1) + " is completed");
+          if (i == 0) {
+            updateProgressBar(25);
+            popup = document.getElementById("step1Popup");
+            openPopup();
+          } else if (i== 1) {
+            updateProgressBar(50);
+            popup = document.getElementById("step2Popup");
+            openPopup();
+          } else if (i == 2) {
+            updateProgressBar(75);
+            popup = document.getElementById("step3Popup");
+            openPopup();
+          } else if (i == 3) {
+            updateProgressBar(100);
+            popup = document.getElementById("fullPopup");
+            openPopup();
+          }
+        } else {
+          console.log("This is not step " + (i+1));
+        }
+      })
+      }
       } else if (whichUseCase == "BUTTON") {
         xmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml"];
-      } else {
-        alert("Please first select a use case in the home screen");
-      }
-      
-      updateProgressBar(0);
-      for (let i = 0; i < xmlFiles.length; i++) {
-        console.log(xmlFiles);
+        for (let i = 0; i < xmlFiles.length; i++) {
         loadXmlCodeFile(xmlFiles[i]).then(result => {
         if (result) {
           console.log("Step " + (i+1) + " is completed");
@@ -599,19 +619,7 @@
             updateProgressBar(66);
             popup = document.getElementById("step2Popup");
             openPopup();
-          } else if (i == 3) {
-            updateProgressBar(25);
-            popup = document.getElementById("step1Popup");
-            openPopup();
-          } else if (i== 4) {
-            updateProgressBar(50);
-            popup = document.getElementById("step2Popup");
-            openPopup();
-          } else if (i == 5) {
-            updateProgressBar(75);
-            popup = document.getElementById("step3Popup");
-            openPopup();
-          } else if (i == 2 || i == 6) {
+          } else if (i == 2) {
             updateProgressBar(100);
             popup = document.getElementById("fullPopup");
             openPopup();
@@ -621,6 +629,9 @@
         }
       })
       }
+      } else {
+        alert("Please first select a use case in the home screen");
+      } 
     }
 
     function openPopup() {
@@ -776,6 +787,7 @@
       whichUseCase = "SOUND";
       console.log(whichUseCase);
       popupSound.classList.remove("open-homescreen-popup");
+      updateProgressBar(0);
     }
 
     function backSound() {
@@ -791,7 +803,8 @@
     function startButton() {
       whichUseCase = "BUTTON";
       console.log(whichUseCase);
-      popupButton.classList.remove("open-homescreen-popup")
+      popupButton.classList.remove("open-homescreen-popup");
+      updateProgressBar(0);
     }
 
     function backButton() {
