@@ -62,7 +62,7 @@ Blockly.Blocks.base_map = {
 Blockly.Blocks.inout_buildin_led = {
   helpUrl: "http://arduino.cc/en/Reference/DigitalWrite",
   init: function () {
-    this.setColour(190);
+    this.setColour(230);
     this.appendDummyInput()
       .appendField("Build-in LED Stat")
       .appendField(
