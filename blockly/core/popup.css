@@ -121,8 +121,10 @@
     color: #070505;
     visibility: hidden;
     z-index: 2;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .open-homescreen-popup {
