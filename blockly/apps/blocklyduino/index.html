@@ -663,8 +663,28 @@
 
   <div class="container">
     <div class="popup" id="usecasetwo">
-      <h3>Try...</h3>
+      <h3>Hint 1:</h3>
+      <h4>Remember that a button being in a high state means it is pressed and low means it is not!</h4>
+      <button type="button" onclick="CaseTwoHintTwo()">Another hint</button>
       <button type="button" onclick="closeHintPopupTwo()">Close</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecasetwo_hinttwo">
+      <h3>Hint 2:</h3>
+      <h4>You can use a block with if, do and else to set when the lights should turn on.</h4>
+      <button type="button" onclick="CaseTwoHintThree()">Another hint</button>
+      <button type="button" onclick="closeHintPopupTwoHintTwo()">Try again!</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecasetwo_hintthree">
+      <h3>Hint 3:</h3>
+      <h4>Take a look at the colours of the blocks and the order that you should put them in! need to put right picture in.</h4>
+      <img class="img2" src="../../media/Use case button (2).png">
+      <button type="button" onclick="closeHintPopupTwoHintThree()">Try again!</button>
     </div>
   </div>
 
@@ -674,6 +694,8 @@
     let caseone_hinttwo = document.getElementById("usecaseone_hinttwo");
     let caseone_hintthree = document.getElementById("usecaseone_hintthree");
     let casetwo = document.getElementById("usecasetwo");
+    let casetwo_hinttwo = document.getElementById("usecasetwo_hinttwo");
+    let casetwo_hintthree = document.getElementById("usecasetwo_hintthree");
 
     function openHint(){
       hintpopup.classList.add("open-popup");
@@ -713,6 +735,24 @@
 
     function closeHintPopupTwo(){
       casetwo.classList.remove("open-popup");
+    }
+
+    function CaseTwoHintTwo(){
+      casetwo.classList.remove("open-popup");
+      casetwo_hinttwo.classList.add("open-popup");
+    }
+
+    function closeHintPopupTwoHintTwo(){
+      casetwo_hinttwo.classList.remove("open-popup")
+    }
+
+    function CaseTwoHintThree(){
+      casetwo_hinttwo.classList.remove("open-popup");
+      casetwo_hintthree.classList.add("open-popup");
+    }
+
+    function closeHintPopupTwoHintThree(){
+      casetwo_hintthree.classList.remove("open-popup")
     }
 
   </script>
