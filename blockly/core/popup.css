@@ -138,8 +138,15 @@
     text-align: center;
   }
 
-.use-case-background {
+.sound-case-background {
     background-color: rgba(91, 128, 165, 0.6); /* Example background color for steps */
+    padding: 0px;
+    border-radius: 6px;
+    margin-bottom: 0px; 
+}
+
+.button-case-background {
+    background-color: rgba(165, 91, 128, 0.6); /* Example background color for steps */
     padding: 0px;
     border-radius: 6px;
     margin-bottom: 0px; 
