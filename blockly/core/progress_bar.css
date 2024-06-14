@@ -1,13 +1,24 @@
 .progress-container {
-    width: 20%;
-    position: relative;
-    bottom: 0;
-    background-color: #f0f0f0;
-    z-index: 0; /* Ensures it stays above other content */
-  }
-  
-  .progress-bar {
-    width: 0%; /* Initial width */
-    height: 60px;
-    background-color: #609560;
-  }
+  width: 20%;
+  position: relative;
+  bottom: 0;
+  background-color: #f0f0f0;
+  z-index: 0; /* Ensures it stays above other content */
+  text-align: center;
+}
+
+.progress-bar {
+  width: 0%; /* Initial width */
+  height: 60px;
+  background-color: #6daa6d;
+  position: flex;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: black;
+}

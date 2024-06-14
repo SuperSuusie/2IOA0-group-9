@@ -331,6 +331,7 @@
             <td class="tabmin">&nbsp;</td>
             <td class = "progress-container">
                 <div class="progress-bar" id="myBar"></div>
+                <div id="progressText" class="progress-text">0%</div>
             </td>
             <td class="tabmax">
               <button type="button" onclick="openHint()">Hint</button>
@@ -676,7 +677,7 @@
   <div class="container">
     <div class="popup" id="usecasetwo">
       <h3>Hint 1:</h3>
-      <h4>You can use a block with if, do and else to set when the lights should turn on.</h4>
+      <h4>You can use a block with if and else to set when the lights should turn on.</h4>
       <button type="button" onclick="CaseTwoHintTwo()">Another hint</button>
       <button type="button" onclick="closeHintPopupTwo()">Close</button>
     </div>
@@ -865,7 +866,9 @@
     // Function to update the progress bar width
     function updateProgressBar(progress) {
       var progressBar = document.getElementById("myBar");
+      var progressText = document.getElementById("progressText");
       progressBar.style.width = progress + "%";
+      progressText.textContent = progress + "%";
     }
 
     updateProgressBar(0);
