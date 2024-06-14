@@ -62,7 +62,7 @@ Blockly.Blocks.base_map = {
 Blockly.Blocks.inout_buildin_led = {
   helpUrl: "http://arduino.cc/en/Reference/DigitalWrite",
   init: function () {
-    this.setColour(190);
+    this.setColour(230);
     this.appendDummyInput()
       .appendField("Build-in LED Stat")
       .appendField(
@@ -77,7 +77,7 @@ Blockly.Blocks.inout_buildin_led = {
     this.setTooltip("light or off the build-in LED");
   },
   mutationToDom: function() {
-    this.sound_correct_block();
+    this.sound_wrong_block();
     return null;
   },
 };
@@ -731,6 +731,10 @@ Blockly.Blocks.grove_pir_motion_sensor = {
     this.setTooltip(
       "When anyone moves in it's detecting range, the sensor outputs HIGH."
     );
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.grove_line_finder = {
@@ -1486,6 +1490,10 @@ Blockly.Blocks.controls_if = {
     });
     this.elseCount_ = this.elseifCount_ = 0;
   },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
+  },
   mutationToDom: function () {
     if (!this.elseifCount_ && !this.elseCount_) return null;
     var a = document.createElement("mutation");
@@ -1580,10 +1588,6 @@ Blockly.Blocks.controls_if = {
       a = a.nextConnection && a.nextConnection.targetBlock();
     }
   },
-  mutationToDom: function() {
-    this.sound_correct_block();
-    return null;
-  },
 };
 Blockly.Blocks.controls_if_if = {
   init: function () {
@@ -1592,10 +1596,6 @@ Blockly.Blocks.controls_if_if = {
     this.appendStatementInput("STACK");
     this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
     this.contextMenu = !1;
-  },
-  mutationToDom: function() {
-    this.sound_correct_block();
-    return null;
   },
 };
 Blockly.Blocks.controls_if_elseif = {
@@ -1609,10 +1609,7 @@ Blockly.Blocks.controls_if_elseif = {
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
     this.contextMenu = !1;
   },
-  mutationToDom: function() {
-    this.sound_correct_block();
-    return null;
-  },
+
 };
 Blockly.Blocks.controls_if_else = {
   init: function () {
@@ -1624,10 +1621,7 @@ Blockly.Blocks.controls_if_else = {
     this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
     this.contextMenu = !1;
   },
-  mutationToDom: function() {
-    this.sound_correct_block();
-    return null;
-  },
+
 };
 Blockly.Blocks.logic_compare = {
   init: function () {
@@ -1854,7 +1848,7 @@ Blockly.Blocks.controls_whileUntil = {
     });
   },
   mutationToDom: function() {
-    this.sound_wrong_block();
+    this.sound_correct_block();
     return null;
   },
 };
@@ -1904,6 +1898,10 @@ Blockly.Blocks.controls_for = {
       b.callback = Blockly.ContextMenu.callbackFactory(this, c);
       a.push(b);
     }
+  },
+  mutationToDom: function() {
+    this.sound_wrong_block();
+    return null;
   },
 };
 Blockly.Blocks.controls_forEach = {
@@ -3211,6 +3209,10 @@ Blockly.Blocks.variables_get = {
     c.setAttribute("type", this.contextMenuType_);
     b.callback = Blockly.ContextMenu.callbackFactory(this, c);
     a.push(b);
+  },
+  mutationToDom: function() {
+    this.sound_correct_block();
+    return null;
   },
 };
 Blockly.Blocks.variables_set = {

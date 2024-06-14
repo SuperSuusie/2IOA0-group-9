@@ -308,9 +308,9 @@
 <body onload="init()">
   <table height="100%" width="100%">
     <tr>
-      <td>
-        <h1><a href="https://github.com/gasolin/BlocklyDuino/wiki">BlocklyDuino</a> &gt; web-based visual programming
-          editor for arduino</h1>
+      <td style="white-space: nowrap;">
+        <img class="img3" src="../../media/logo3.png" style="vertical-align: middle;">
+        <button class="homeButton" onclick="goToHomescreen()" style="vertical-align: middle;">Homescreen</button>
       </td>
     </tr>
     <tr>
@@ -495,13 +495,13 @@
     <div class="popup" id="uploadPopup">
       <img src="../../media/thumbsUp.png">
       <h2>Great Job</h2>
-      <p>You&apos;ve uploaded your code!</p>
+      <p>You have uploaded your code!</p>
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
   <!-- Code for saving arduino code popup -->
     <div class="popup" id="arduinoPopup">
       <img src="../../media/thumbsUp.png">
-      <h2>You&apos;ve saved the arduino code</h2>
+      <h2>You have saved the arduino code</h2>
       <p>Well done, keep working on it!</p>
       <button type="button" onclick="closePopup()">Continue</button>
     </div>
@@ -579,12 +579,41 @@
     }
 
     //code to check each step of each Use Case
-    function checkCode() {
+    var xmlFiles;
 
-      var allXmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml", "xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
-      
-      for (let i = 0; i < allXmlFiles.length; i++) {
-        loadXmlCodeFile(allXmlFiles[i]).then(result => {
+    function checkCode() {
+      if (whichUseCase == "SOUND") {
+        xmlFiles = ["xmlStep1UC2.xml", "xmlStep2UC2.xml", "xmlStep3UC2.xml", "xmlFullUC2.xml"];
+        for (let i = 0; i < xmlFiles.length; i++) {
+        loadXmlCodeFile(xmlFiles[i]).then(result => {
+        if (result) {
+          console.log("Step " + (i+1) + " is completed");
+          if (i == 0) {
+            updateProgressBar(25);
+            popup = document.getElementById("step1Popup");
+            openPopup();
+          } else if (i== 1) {
+            updateProgressBar(50);
+            popup = document.getElementById("step2Popup");
+            openPopup();
+          } else if (i == 2) {
+            updateProgressBar(75);
+            popup = document.getElementById("step3Popup");
+            openPopup();
+          } else if (i == 3) {
+            updateProgressBar(100);
+            popup = document.getElementById("fullPopup");
+            openPopup();
+          }
+        } else {
+          console.log("This is not step " + (i+1));
+        }
+      })
+      }
+      } else if (whichUseCase == "BUTTON") {
+        xmlFiles = ["xmlStep1UC1.xml", "xmlStep2UC1.xml", "xmlFullUC1.xml"];
+        for (let i = 0; i < xmlFiles.length; i++) {
+        loadXmlCodeFile(xmlFiles[i]).then(result => {
         if (result) {
           console.log("Step " + (i+1) + " is completed");
           if (i == 0) {
@@ -595,19 +624,7 @@
             updateProgressBar(66);
             popup = document.getElementById("step2Popup");
             openPopup();
-          } else if (i == 3) {
-            updateProgressBar(25);
-            popup = document.getElementById("step1Popup");
-            openPopup();
-          } else if (i== 4) {
-            updateProgressBar(50);
-            popup = document.getElementById("step2Popup");
-            openPopup();
-          } else if (i == 5) {
-            updateProgressBar(75);
-            popup = document.getElementById("step3Popup");
-            openPopup();
-          } else if (i == 2 || i == 6) {
+          } else if (i == 2) {
             updateProgressBar(100);
             popup = document.getElementById("fullPopup");
             openPopup();
@@ -617,6 +634,9 @@
         }
       })
       }
+      } else {
+        alert("Please first select a use case in the home screen");
+      } 
     }
 
     function openPopup() {
@@ -632,17 +652,9 @@
 
   <!-- code for hint popup -->
   <div class="container">
-    <div class="popup" id="openhintpopup">
-      <h3>Which use case are you working on?</h3>
-      <button type="button" onclick="useCaseOne()">Sound Sensor</button>
-      <button type="button" onclick="useCaseTwo()">Button</button>
-    </div>
-  </div>
-
-  <div class="container">
     <div class="popup" id="usecaseone">
       <h3>Hint 1:</h3>
-      <h4>Remember to first define the sound sensor using the "set" block!</h4>
+      <h4>Remember to first define the sound sensor using the "set" block, with the name "soundStateCurrent"!</h4>
       <button type="button" onclick="CaseOneHintTwo()">Another hint</button>
       <button type="button" onclick="closeHintPopupOne()">Try again!</button>
     </div>
@@ -668,24 +680,50 @@
 
   <div class="container">
     <div class="popup" id="usecasetwo">
-      <h3>Try...</h3>
+      <h3>Hint 1:</h3>
+      <h4>You can use a block with if, do and else to set when the lights should turn on.</h4>
+      <button type="button" onclick="CaseTwoHintTwo()">Another hint</button>
       <button type="button" onclick="closeHintPopupTwo()">Close</button>
     </div>
   </div>
 
+  <div class="container">
+    <div class="popup" id="usecasetwo_hinttwo">
+      <h3>Hint 2:</h3>
+      <h4>Remember that a button being in a high state means it is pressed and low means it is not!</h4>
+      <button type="button" onclick="CaseTwoHintThree()">Another hint</button>
+      <button type="button" onclick="closeHintPopupTwoHintTwo()">Try again!</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="popup" id="usecasetwo_hintthree">
+      <h3>Hint 3:</h3>
+      <h4>Take a look at the colours of the blocks and the order that you should put them in! need to put right picture in.</h4>
+      <img class="img2" src="../../media/Use case button (2).png">
+      <button type="button" onclick="closeHintPopupTwoHintThree()">Try again!</button>
+    </div>
+  </div>
+
   <script>   
-  	let hintpopup = document.getElementById("openhintpopup");
     let caseone = document.getElementById("usecaseone");
     let caseone_hinttwo = document.getElementById("usecaseone_hinttwo");
     let caseone_hintthree = document.getElementById("usecaseone_hintthree");
     let casetwo = document.getElementById("usecasetwo");
+    let casetwo_hinttwo = document.getElementById("usecasetwo_hinttwo");
+    let casetwo_hintthree = document.getElementById("usecasetwo_hintthree");
 
     function openHint(){
-      hintpopup.classList.add("open-popup");
+      if (whichUseCase == "SOUND") {
+        useCaseOne();
+      } else if (whichUseCase == "BUTTON") {
+        useCaseTwo();
+      } else {
+        alert("Please first select a use case in the home screen");
+      }
     }
 
     function useCaseOne(){
-      hintpopup.classList.remove("open-popup");
       caseone.classList.add("open-popup");
     }
 
@@ -708,7 +746,6 @@
     }
 
     function useCaseTwo(){
-      hintpopup.classList.remove("open-popup");
       casetwo.classList.add("open-popup");
     }
     
@@ -720,6 +757,115 @@
       casetwo.classList.remove("open-popup");
     }
 
+    function CaseTwoHintTwo(){
+      casetwo.classList.remove("open-popup");
+      casetwo_hinttwo.classList.add("open-popup");
+    }
+
+    function closeHintPopupTwoHintTwo(){
+      casetwo_hinttwo.classList.remove("open-popup")
+    }
+
+    function CaseTwoHintThree(){
+      casetwo_hinttwo.classList.remove("open-popup");
+      casetwo_hintthree.classList.add("open-popup");
+    }
+
+    function closeHintPopupTwoHintThree(){
+      casetwo_hintthree.classList.remove("open-popup")
+    }
+
+  </script>
+
+  <div class="homescreen-popup" id="homescreenPopup">
+    <img class="img2" src="../../media/logo.png">
+    <h3>Which use case do you want to work on?</h3>
+    <div class="buttons-container">
+      <button type="button" onclick="goToUCSound()">Sound Sensor</button>
+      <button type="button" onclick="goToUCButton()">Button</button>
+    </div>
+  </div>
+
+  <div class="homescreen-popup" id="soundPopup">
+    <div class="popup-content">
+      <div class="sound-case-background">
+        <h3>The sound use case</h3>
+      </div>
+      <p>In this use case your task is to be able to put code together in such a way that the harder you scream into the sound sensor, the more lights turn on.</p>
+      <p><strong>Step 1:</strong> Connect a variable with the name "soundStateCurrent" to the sound sensor</p>
+      <p><strong>Step 2:</strong> If the sound sensor reaches the threshold of 100 or higher, the first light on pin 13 should turn on. After 1 second it should automatically turn off again.</p>
+      <p><strong>Step 3:</strong> If the sound sensor reaches the threshold of 400 or higher, the second light on pin 12 should turn on. After 1 second it should automatically turn off again.</p>
+      <p><strong>Step 4:</strong> If the sound sensor reaches the threshold of 700 or higher, the second light on pin 11 should turn on. After 1 second it should automatically turn off again.</p>
+      <p>Use the check button to see if you have completed the steps in the correct way!</p>
+      <div class="buttons-container">
+        <button type="button" onclick="backSound()">Back</button>
+        <button type="button" onclick="startSound()">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="homescreen-popup" id="buttonPopup">
+    <div class="popup-content">
+      <div class="button-case-background">
+        <h3>The button use case</h3>
+      </div>
+      <p>In this use case your task is to be able to put code together in such a way that the longer you hold down the button, the more lights turn on. </p>
+      <p><strong>Step 1:</strong> If the button on pin 7 is held down, the first led on pin 13 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
+      <p><strong>Step 2:</strong> If the button on pin 7 is still held down after two seconds, the second led on pin 12 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
+      <p><strong>Step 3:</strong> If the button on pin 7 is still held down after two seconds, the third led on pin 11 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>  
+      <p>Use the check button to see if you have completed the steps in the correct way!</p>  
+    </div>
+    <div class="buttons-container">
+      <button type="button" onclick="backButton()">Back</button>
+      <button type="button" onclick="startButton()">Start</button>
+    </div>
+  </div>
+
+
+  <script>
+    var whichUseCase;
+    let popupHomescreen = document.getElementById("homescreenPopup");
+    let popupSound = document.getElementById("soundPopup");
+    let popupButton = document.getElementById("buttonPopup");
+    popupHomescreen.classList.add("open-homescreen-popup");
+
+    function goToHomescreen() {
+      popupHomescreen.classList.add("open-homescreen-popup");
+    }
+
+    function goToUCSound() {
+      popupHomescreen.classList.remove("open-homescreen-popup");
+      popupSound.classList.add("open-homescreen-popup");
+    }
+
+    function startSound() {
+      whichUseCase = "SOUND";
+      console.log(whichUseCase);
+      popupSound.classList.remove("open-homescreen-popup");
+      updateProgressBar(0);
+    }
+
+    function backSound() {
+      popupSound.classList.remove("open-homescreen-popup");
+      popupHomescreen.classList.add("open-homescreen-popup");
+    }
+
+    function goToUCButton() {
+      popupHomescreen.classList.remove("open-homescreen-popup");
+      popupButton.classList.add("open-homescreen-popup");
+    }
+
+    function startButton() {
+      whichUseCase = "BUTTON";
+      console.log(whichUseCase);
+      popupButton.classList.remove("open-homescreen-popup");
+      updateProgressBar(0);
+    }
+
+    function backButton() {
+      popupButton.classList.remove("open-homescreen-popup");
+      popupHomescreen.classList.add("open-homescreen-popup");
+    }
   </script>
 
   <script>

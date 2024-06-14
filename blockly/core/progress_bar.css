@@ -1,13 +1,13 @@
 .progress-container {
-    width: 40%;
+    width: 20%;
     position: relative;
     bottom: 0;
     background-color: #f0f0f0;
-    z-index: 9999; /* Ensures it stays above other content */
+    z-index: 0; /* Ensures it stays above other content */
   }
   
   .progress-bar {
     width: 0%; /* Initial width */
-    height: 35px;
+    height: 60px;
     background-color: #4caf50;
   }

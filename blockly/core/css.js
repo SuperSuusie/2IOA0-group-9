@@ -387,6 +387,7 @@ Blockly.Css.CONTENT = [
   '  overflow-x: visible;',
   '  overflow-y: auto;',
   '  position: absolute;',
+  '  z-index: 0;',
   '}',
 
   '.blocklyTreeRoot {',
