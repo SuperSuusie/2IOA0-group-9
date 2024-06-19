@@ -384,6 +384,7 @@
     <category name="Hardware">
       <block type="grove_led"></block>
       <block type="grove_button"></block>
+      <block type="grove_sound_sensor"></block>
     </category>
     <category name="Logic">
       <block type="controls_if"></block>
@@ -441,7 +442,6 @@
       <category name="Grove Analog">
         <block type="grove_rotary_angle"></block>
         <block type="grove_temporature_sensor"></block>
-        <block type="grove_sound_sensor"></block>
         <block type="grove_thumb_joystick"></block>
       </category>
       <category name="Grove">
@@ -794,9 +794,9 @@
       </div>
       <p>In this use case your task is to be able to put code together in such a way that the harder you scream into the sound sensor, the more lights turn on.</p>
       <p><strong>Step 1:</strong> Connect a variable with the name "soundStateCurrent" to the sound sensor</p>
-      <p><strong>Step 2:</strong> If the sound sensor reaches the threshold of 100 or higher, the first light on pin 13 should turn on. After 1 second it should automatically turn off again.</p>
-      <p><strong>Step 3:</strong> If the sound sensor reaches the threshold of 400 or higher, the second light on pin 12 should turn on. After 1 second it should automatically turn off again.</p>
-      <p><strong>Step 4:</strong> If the sound sensor reaches the threshold of 700 or higher, the second light on pin 11 should turn on. After 1 second it should automatically turn off again.</p>
+      <p><strong>Step 2:</strong> If the sound sensor reaches the threshold of 400 or higher, the first light on pin 13 should turn on. After 0.3 seconds it should automatically turn off again.</p>
+      <p><strong>Step 3:</strong> If the sound sensor reaches the threshold of 440 or higher, the second light on pin 12 should turn on. After 0.3 seconds it should automatically turn off again.</p>
+      <p><strong>Step 4:</strong> If the sound sensor reaches the threshold of 900 or higher, the third light on pin 11 should turn on. After 0.3 seconds it should automatically turn off again.</p>
       <p>Use the check button to see if you have completed the steps in the correct way!</p>
       <div class="buttons-container">
         <button type="button" onclick="backSound()">Back</button>
@@ -811,9 +811,9 @@
         <h3>The button use case</h3>
       </div>
       <p>In this use case your task is to be able to put code together in such a way that the longer you hold down the button, the more lights turn on. </p>
-      <p><strong>Step 1:</strong> If the button on pin 7 is held down, the first led on pin 13 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
-      <p><strong>Step 2:</strong> If the button on pin 7 is still held down after two seconds, the second led on pin 12 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
-      <p><strong>Step 3:</strong> If the button on pin 7 is still held down after two seconds, the third led on pin 11 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>  
+      <p><strong>Step 1:</strong> If the button on pin 7 is held down, the first light on pin 13 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
+      <p><strong>Step 2:</strong> If the button on pin 7 is still held down after two seconds, the second light on pin 12 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>
+      <p><strong>Step 3:</strong> If the button on pin 7 is still held down after two seconds, the third light on pin 11 should turn on. It should reset after two seconds. Make sure that if the button isnt held down, the led does not turn on.</p>  
       <p>Use the check button to see if you have completed the steps in the correct way!</p>  
     </div>
     <div class="buttons-container">
