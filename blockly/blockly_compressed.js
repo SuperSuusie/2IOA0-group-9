@@ -3720,7 +3720,7 @@ goog.math.Coordinate.prototype.rotateDegrees = function (a, b) {
 };
 goog.math.Size = function (a, b) {
   this.width = a;
-  this.height = b;
+  this.height = b+10;
 };
 goog.math.Size.equals = function (a, b) {
   return a == b ? !0 : a && b ? a.width == b.width && a.height == b.height : !1;
@@ -21564,6 +21564,11 @@ Blockly.Toolbox.prototype.populate_ = function (a) {
           case "CATEGORY":
             var h = c.createNode(g.getAttribute("name"));
             h.blocks = [];
+            // Extract and apply color if present
+            var color = g.getAttribute("colour");
+            if (color) {
+              h.htmlDiv_.style.backgroundColor = color;
+            }
             e.add(h);
             var k = g.getAttribute("custom");
             k ? (h.blocks = k) : b(g, h);

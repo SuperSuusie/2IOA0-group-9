@@ -387,6 +387,7 @@ Blockly.Css.CONTENT = [
   '  overflow-x: visible;',
   '  overflow-y: auto;',
   '  position: absolute;',
+  '  z-index: 0;',
   '}',
 
   '.blocklyTreeRoot {',
@@ -414,7 +415,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyTreeSeparator {',
-  '  border-bottom: solid #e5e5e5 1px;',
+  '  border-bottom: solid #e5e5e5 3px;',
   '  height: 0px;',
   '  margin: 5px 0;',
   '}',
